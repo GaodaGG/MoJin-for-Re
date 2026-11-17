@@ -10,8 +10,11 @@ and Chinese paths.
 ## Clone and build without an ISO
 
 ```powershell
-git -c core.autocrlf=false clone --recurse-submodules https://github.com/GaodaGG/MoJin-for-Re.git
+git -c core.autocrlf=false clone --no-checkout https://github.com/GaodaGG/MoJin-for-Re.git
 cd MoJin-for-Re
+git lfs install --local
+git checkout main
+git submodule update --init --recursive
 git lfs pull
 python development/tools/setup.py
 python development/tools/build.py prepared --output-name mojin-isofree.exe
@@ -23,6 +26,12 @@ packaging refuses to overwrite existing settings or saves. To update a working
 copy, use a fresh candidate directory and retain the previous package until the
 new one has been tested. `play/`, `development/releases/`, test outputs and private
 evidence are excluded from Git.
+
+The explicit checkout avoids Git 2.45.1's clone-time LFS hook regression while
+retaining clone protection. Git LFS installs its local hooks before that separate
+checkout; no remote repository hook is supplied or run by this project. See the
+[Git LFS discussion](https://github.com/git-lfs/git-lfs/discussions/5750) and
+[Git 2.45.2 release notes](https://github.com/git/git/blob/v2.45.2/Documentation/RelNotes/2.45.2.txt).
 
 `setup.py` fetches only the fixed upstream prerequisite archive and the pinned
 Noto font/license. It verifies hashes before use. It does not install machine-wide

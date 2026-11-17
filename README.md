@@ -9,8 +9,11 @@ PSP《魔法禁书目录》（ULJS00329）的实验性静态重编译移植，�
 需要 Windows、Git、Git LFS、Python 3.11+ 和可用的 Vulkan 驱动。构建目录路径请不要包含空格。仓库不包含 ISO、预编译游戏 EXE、个人存档或诊断转储；包含预生成游戏 C、程序数据以及通过 LFS 管理的提取资源。
 
 ```powershell
-git -c core.autocrlf=false clone --recurse-submodules https://github.com/GaodaGG/MoJin-for-Re.git
+git -c core.autocrlf=false clone --no-checkout https://github.com/GaodaGG/MoJin-for-Re.git
 cd MoJin-for-Re
+git lfs install --local
+git checkout main
+git submodule update --init --recursive
 git lfs pull
 python development/tools/setup.py
 python development/tools/build.py prepared --output-name mojin-isofree.exe
@@ -18,6 +21,8 @@ python development/tools/package_preview.py development/releases/local --exe moj
 ```
 
 上述构建不读取 ISO。setup 下载固定版本的工具链和字体并校验摘要；prepared 模式校验生成代码、资源及来源后，从 C 重新编译全部所需本机对象。不能只下载 GitHub 的普通源码 ZIP 而忽略 submodule 和 LFS 对象。
+
+这里将克隆与首次 checkout 分开，兼容本机 Git 2.45.1 的 LFS hook 限制；不需要关闭 Git 的克隆安全检查。
 
 完成后双击 **`development/releases/local/MoJin.exe`**。整个运行目录可复制到其他位置，运行不需要 ISO、Python、编译器或项目目录；必须保留资源、DLL、字体和许可文件。打包目标需要为空，以保护已有设置和存档。维护者的完整构建、增量修改及恢复说明见 [开发文档](docs/DEVELOPMENT.md)。
 
