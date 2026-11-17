@@ -81,7 +81,16 @@ hands input back to the user and exits when that game window is closed.
 `probe.py --runtime-package development/releases/local` tests a packaged candidate
 with a private save and a runtime PATH containing only System32.
 
-Pillow 11.3.0 is used by image verification tools, not by the packaged game.
+Pillow 11.3.0 is used by image verification tools, not by the packaged game or
+the prepared build. Install it in a project-local environment when running those
+optional checks, then use that environment's Python for the verification script:
+
+```powershell
+python -m venv development/diagnostic-venv
+development/diagnostic-venv/Scripts/python -m pip install Pillow==11.3.0
+development/diagnostic-venv/Scripts/python development/tools/verify_settings_probe.py <private-run-directory>
+```
+
 Diagnostic scripts that compare against original instructions or private captured
 evidence require those additional local inputs; not every investigative script is
 a clean-clone acceptance test.

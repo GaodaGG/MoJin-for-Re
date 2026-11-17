@@ -36,8 +36,14 @@ def main():
             continue
         entries["play/" + name] = data
     entries["play/release-manifest.json"] = (package / "release-manifest.json").read_bytes()
+    prepared_mode = manifest['build'].get('game_input', {}).get('mode') == 'prepared-c'
+    resource_source = (
+        'Restore the matching Git checkout and run git lfs pull to materialize development/resources/game; no ISO is required.'
+        if prepared_mode else
+        'Run python development/tools/disc_data.py extract from the pinned original ISO if the verified shared resource tree is absent.'
+    )
     entries['shared-resources.json'] = (json.dumps(dict(files=shared_resources,
-        restore='Run python development/tools/disc_data.py extract from the pinned original ISO, then python development/tools/restore_shared_resources.py <restored-runtime-folder>. Existing files are verified and never overwritten.'),indent=2)+'\n').encode()
+        restore=resource_source + ' Then run python development/tools/restore_shared_resources.py <restored-runtime-folder>. Existing files are verified and never overwritten.'),indent=2)+'\n').encode()
     for name, expected in manifest["build"]["local_build_inputs"].items():
         data = (ROOT / name).read_bytes()
         assert sha(data) == expected, name
@@ -47,7 +53,7 @@ def main():
                  "CONTINUE.md", "development/DEVELOPMENT.md"]:
         if (ROOT / name).is_file():
             entries[name] = (ROOT / name).read_bytes()
-    if manifest['build'].get('game_input', {}).get('mode') == 'prepared-c':
+    if prepared_mode:
         from prepared_game import verify
         prepared = verify()
         for name in [*prepared['files'], 'manifest.json']:

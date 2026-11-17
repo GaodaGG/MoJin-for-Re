@@ -1,6 +1,7 @@
 """Restore missing runtime resource links after a verified preview ZIP restore.
 
-Run disc_data.py extract first if the shared resource tree is absent. Existing
+For a prepared checkout, use git lfs pull if shared resources are absent; no ISO
+is needed. The raw-input workflow can instead run disc_data.py extract. Existing
 resource bytes are checked, never overwritten; settings/saves are untouched.
 """
 import argparse

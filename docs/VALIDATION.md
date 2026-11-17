@@ -69,6 +69,35 @@ fresh-rebuild battle routes no further pipelines were created during drawing.
 Application-private caches started empty; the driver-wide cache was not cleared.
 These results do not establish cold-driver timing or all-game shader coverage.
 
+## Published repository checkout, 2026-11-17
+
+A new remote clone of commit `b635d0342c17461517b06d89646dcd0237485cd9`
+completed checkout, recursive submodule initialization, Git LFS download, setup,
+prepared compilation and packaging. The checkout contained neither an ISO nor an
+input ELF, nor previous native build outputs. The original external ISO was
+read-only locked against other opens throughout these stages and the battle run.
+Setup reused the byte-verified official prerequisite archive/tool files; the font
+was fetched from its pinned official source. No existing game EXE or objects were
+copied into the build.
+
+The resulting EXE SHA256 is
+`15c81bbbcc01c4d6c56935fd1bc03bb3d4df35970407720b3a426c860167b7a0`.
+A new private battle process ran for 150.292 seconds, created its initial
+3,744-byte save, accepted Esc through the normal input path, displayed settings,
+and exited normally. Its logs reported zero interpreter entries, missing static
+dispatches, loose-file read errors and dropped audio frames. Nine pipelines were
+created during preparation and none during drawing. Actual night-bridge battle
+and Chinese settings captures were visually inspected; dimensions were scene
+3840×2176, composition 1920×1088, output 960×544 with SSAA2.
+
+The image-check subprocess initially failed because the runner intentionally hid
+user-installed Python packages, including Pillow. After that failure was retained,
+the existing host Pillow 11.3.0 completed the image checks; the game and build inputs
+were unchanged. A separate no-argument launch with System32-only runtime PATH and
+the ISO locked again exited normally. All seven icon images matched. The cloned
+tracked tree remained clean after the build and tests. This adds remote retrieval
+and fresh-build evidence; it does not extend the scene coverage listed above.
+
 ## Boundaries
 
 Initial-save transport is not proof of story progression, unlocks or every slot.

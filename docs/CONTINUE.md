@@ -3,6 +3,12 @@
 Milestone: **0.1.2-dev**, Windows-only acceptance so far. Read README for build/run
 commands, COPYRIGHT.md for license boundaries, and VALIDATION.md for exact scope.
 
+The published repository has passed a fresh remote-clone/submodule/LFS build and
+packaging check without an ISO, followed by the scoped bridge battle, Esc settings,
+and no-argument EXE launch. See VALIDATION.md for the tested commit and EXE hashes.
+`play/` remains an ignored local installation; maintainers create their own package
+from the committed prepared inputs. ISO files, saves and private evidence stay local.
+
 The active runtime is ahead-of-time compiled MIPS game code plus PSP system and
 graphics/audio services. CPU interpreter bodies are replaced by fatal guards.
 Loose game files replace the ISO reader. The prepared build takes versioned C,
