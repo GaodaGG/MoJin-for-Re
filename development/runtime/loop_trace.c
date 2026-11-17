@@ -14,6 +14,9 @@ typedef struct {
     uint32_t time_s_bits, tick_remainder, whole_ticks;
     uint32_t battle_object, battle_valid, battle_state, battle_ticks, battle_calls, battle_handler;
     uint32_t input_buttons, input_pressed, stick_direction, stick_pressed, input_history_index;
+    uint64_t engine_time_us;
+    int32_t speed_factor;
+    uint32_t step_override_bits;
 } MojinLoopRow;
 static MojinLoopRow rows[131072];
 static unsigned count, dropped;
@@ -22,7 +25,7 @@ static FILE *output;
 
 static void finish(void) {
     if (!output) return;
-    fputs("seq,host_ns,guest_us,vcount,pc,callback,state,engine_frame,uid,scene_callback,update_count,step_i,step_f_bits,step_frame_bits,time_s_bits,tick_remainder,whole_ticks,battle_object,battle_valid,battle_state,battle_ticks,battle_calls,battle_handler,input_buttons,input_pressed,stick_direction,stick_pressed,input_history_index\n", output);
+    fputs("seq,host_ns,guest_us,vcount,pc,callback,state,engine_frame,uid,scene_callback,update_count,step_i,step_f_bits,step_frame_bits,time_s_bits,tick_remainder,whole_ticks,battle_object,battle_valid,battle_state,battle_ticks,battle_calls,battle_handler,input_buttons,input_pressed,stick_direction,stick_pressed,input_history_index,engine_time_us,speed_factor,step_override_bits\n", output);
     for (unsigned i = 0; i < count; ++i) {
         const MojinLoopRow *r = &rows[i];
         fprintf(output, "%u,%llu,%llu,%u,%08x,%08x,%u,%u,%x,%08x,%u,%u,%08x,%08x,%08x,%u,%u", i,
@@ -32,8 +35,10 @@ static void finish(void) {
                 r->step_frame_bits, r->time_s_bits, r->tick_remainder, r->whole_ticks);
         fprintf(output, ",%08x,%u,%u,%u,%u,%08x", r->battle_object, r->battle_valid,
                 r->battle_state, r->battle_ticks, r->battle_calls, r->battle_handler);
-        fprintf(output, ",%u,%u,%u,%u,%u\n", r->input_buttons, r->input_pressed,
+        fprintf(output, ",%u,%u,%u,%u,%u", r->input_buttons, r->input_pressed,
                 r->stick_direction, r->stick_pressed, r->input_history_index);
+        fprintf(output, ",%llu,%d,%08x\n", (unsigned long long)r->engine_time_us,
+                r->speed_factor, r->step_override_bits);
     }
     int failed = ferror(output);
     failed |= fclose(output) != 0;
@@ -84,6 +89,13 @@ void mojin_loop_trace(const CpuState *s, uint32_t pc) {
     r->stick_direction = MEM_R16(0x08a545d6u); /* + 0x1ea */
     r->stick_pressed = MEM_R16(0x08a545d8u); /* + 0x1ec */
     r->input_history_index = MEM_R32(0x08a545e4u); /* + 0x1f8 */
+    /* f_0891bf14 stores its 64-bit system-time sample at engine +0x18f0.
+     * The next common update consumes the step derived from consecutive samples.
+     * The signed +0x0a field participates in the stock two-stage integer division. */
+    r->engine_time_us = (uint64_t)MEM_R32(0x08a65f70u) |
+                       ((uint64_t)MEM_R32(0x08a65f74u) << 32);
+    r->speed_factor = (int16_t)MEM_R16(0x08a543f6u);
+    r->step_override_bits = MEM_R32(0x08a544a0u);
     /* f_08857878 passes this object's +8 pointer to f_088258c4, whose
      * counters and state-handler dispatch were inspected from the static code.
      * Restrict reads to the mapped 32 MiB PSP RAM and the observed class table. */

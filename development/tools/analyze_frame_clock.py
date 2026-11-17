@@ -21,6 +21,22 @@ def float_bits(bits):
     return struct.unpack('<f', int(bits, 16).to_bytes(4, 'little'))[0]
 
 
+def complete_window(samples, label, start=7600, end=8800):
+    """Require evidence on both sides; a normal early exit is not a full test."""
+    counts = [int(r['vcount']) for r in samples]
+    if not counts or counts[0] >= start or counts[-1] <= end:
+        raise ValueError(f'{label}: incomplete observation window {start}:{end}; '
+                         f'available {counts[0] if counts else None}:{counts[-1] if counts else None}')
+    if any(b < a for a, b in itertools.pairwise(counts)):
+        raise ValueError(f'{label}: vcount reversed; cannot combine observation epochs')
+    window = [r for r in samples if start <= int(r['vcount']) <= end]
+    if len(window) < 3 or int(window[0]['vcount']) > start + 1 or int(window[-1]['vcount']) < end - 1:
+        raise ValueError(f'{label}: samples do not reach both window boundaries')
+    return window, dict(requested=[start, end], available=[counts[0], counts[-1]],
+                        sampled=[int(window[0]['vcount']), int(window[-1]['vcount'])],
+                        bracketed=True)
+
+
 def summarize(run):
     meta = json.loads((run / 'run.json').read_text(encoding='utf-8'))
     assert meta['exit_code'] == 0 and not meta['timed_out'], 'Normal exit required'
@@ -45,8 +61,11 @@ def summarize(run):
     with (run / 'loop.csv').open(newline='') as stream:
         all_rows = list(csv.DictReader(stream))
     assert len(all_rows) == int(trace[1])
-    rows = [r for r in all_rows if r['pc'] == '08907d6c' and 7600 <= int(r['vcount']) <= 8800]
+    assert [int(r['seq']) for r in all_rows] == list(range(len(all_rows))), 'Missing/reordered trace rows'
+    assert all(int(b['host_ns']) >= int(a['host_ns']) for a,b in itertools.pairwise(all_rows)), 'Host time reversed'
+    rows, update_coverage = complete_window([r for r in all_rows if r['pc'] == '08907d6c'], 'updates')
     assert len(rows) > 2 and {r['scene_callback'] for r in rows} == {'0885f978'}
+    assert {r['state'] for r in rows} == {'3'} and len({r['uid'] for r in rows}) == 1
     elapsed = (int(rows[-1]['host_ns']) - int(rows[0]['host_ns'])) / 1e9
     sites = ['08907c44', '08907d6c', '0891d368']
     phases = [r for r in all_rows if r['pc'] in sites and 7600 <= int(r['vcount']) <= 8800]
@@ -78,7 +97,7 @@ def summarize(run):
     dense_times = {k: dict(count=len(v), median=statistics.median(v), minimum=min(v), maximum=max(v))
                    for k, v in dense_spans.items()}
     with (run / 'frames.csv').open(newline='') as stream:
-        frames = [r for r in csv.DictReader(stream) if 7600 <= int(r['vcount']) <= 8800]
+        frames, frame_coverage = complete_window(list(csv.DictReader(stream)), 'frames')
     frame_wall = sum(float(r['wall_ms']) for r in frames) / 1000
     assert len(frames) > 2 and frame_wall > 0
     states = []
@@ -100,10 +119,36 @@ def summarize(run):
                             history_step_mod64=dict(Counter((int(b['input_history_index'])-int(a['input_history_index'])) % 64
                                                           for a,b in itertools.pairwise(rows))),
                             note='Idle route has no scripted presses in this interval; this alone does not verify edge or analog behavior.')
-    return dict(run=str(run.relative_to(DEV)), executable_sha256=meta['executable_sha256'],
+    arithmetic = None
+    if 'engine_time_us' in rows[0]:
+        predictions = []
+        for a,b in itertools.pairwise(rows):
+            delta = int(b['engine_time_us']) - int(a['engine_time_us'])
+            speed = int(b['speed_factor'])
+            assert delta > 0 and speed > 0, 'Unsupported time/speed regime for this arithmetic analysis'
+            assert float_bits(b['step_override_bits']) <= 0, 'Positive common-step override needs separate analysis'
+            percent = delta * 100 // 16667
+            quantized = percent * (speed << 5) // 12800
+            expected = 32 if quantized <= 0 else min(128, quantized)
+            predictions.append(dict(delta_us=delta, speed=speed, expected=expected,
+                                    actual=int(b['step_i']), ideal=delta*100*(speed<<5)/(16667*12800)))
+        arithmetic = dict(samples=len(predictions),
+            speed_values=dict(Counter(r['speed_factor'] for r in rows)),
+            exact_integer_formula_matches=sum(x['expected']==x['actual'] for x in predictions),
+            expected_step_sum=sum(x['expected'] for x in predictions),
+            observed_step_sum=sum(x['actual'] for x in predictions),
+            unrounded_step_sum=sum(x['ideal'] for x in predictions),
+            engine_elapsed_seconds=sum(x['delta_us'] for x in predictions)/1e6,
+            integer_step_seconds=sum(x['actual'] for x in predictions)/1920,
+            unrounded_step_seconds=sum(x['ideal'] for x in predictions)/1920,
+            formula='clamp_or_fallback(floor(floor(delta_us*100/16667)*(speed_i16<<5)/12800))',
+            note='Pinned positive-speed arithmetic only; does not certify consumers or gameplay speed.')
+    return dict(run=str(run.relative_to(DEV)), analyzer_sha256=sha(Path(__file__)), executable_sha256=meta['executable_sha256'],
                 image_sha256=meta['image_sha256'], input_script_sha256=meta['input_script_sha256'],
                 hashes={name: sha(run / name) for name in ('run.json','build.json','input.pad','loop.csv','frames.csv','stderr.log','execution-share.json')},
                 requested_update_rate=int(target) if target else 'original', window=[7600,8800],
+                coverage=dict(updates=update_coverage, frames=frame_coverage),
+                clock_arithmetic=arithmetic,
                 experimental_input_peek=input_requested,
                 input_poll=dict(calls=int(input_log[1]), repeated_samples=int(input_log[2]), errors=int(input_log[3])) if input_log else None,
                 active_experiment_calls=int(clock[2]) if clock else 0,

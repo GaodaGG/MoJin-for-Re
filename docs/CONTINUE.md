@@ -37,13 +37,14 @@ Next priorities:
    before adding scene exceptions. Existing bridge success is not full-game proof.
 2. Investigate city shadows/translucent rectangles and very early OP-skip black
    screens. Diagnose remaining stalls by I/O, decode, upload, compilation and sync.
-3. Finish high-FPS timing experiments. Blocking controller reads limit updates;
-   an experimental Peek/deadline path reached roughly 90 updates/s but showed a
-   mismatch between elapsed wall time and an internal accumulated time field.
-   The 120-Hz test did not cover its whole window. Add full observation-window
-   coverage assertions before interpreting those analyses. Do not enable these
-   settings until movement, particles, animation, physics, cooldowns and movies
-   have independent timing checks.
+3. Finish high-FPS timing experiments. Complete-window checks now reject the old
+   interrupted 120-Hz run. New original/90/120 probes at the same image and EXE
+   verified every sampled integer step against the title's double-division formula;
+   higher update rates lose more time to truncation. See HIGH_FPS.md for exact
+   hashes and measurements. Implement an opt-in static fractional-carry experiment
+   preserving clamp/fallback and discontinuity handling, then independently check
+   movement, particles, animation, physics, cooldowns, input and movies. No new
+   supported FPS settings are enabled.
 4. Isolate Windows host APIs and validate another OS/toolchain before claiming
    cross-platform support. Define state, animation, input and hit-detection hooks
    before promising extensible actions.
