@@ -1,0 +1,3 @@
+[submodule "development/third_party/nakagawa"]
+	path = development/third_party/nakagawa
+	url = https://github.com/Jstar269/Nakagawa-Recomp.git

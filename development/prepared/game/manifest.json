@@ -1,0 +1,548 @@
+{
+  "schema": 1,
+  "source_revision": "2263985dd8882acbbf1a7313f3752979e7f88e2d",
+  "input_iso_sha256": "40469759cf0f033f8610f7920ab09b1866040d80b46ff0bdb16b03dfd137b9cb",
+  "resource_manifest_sha256": "4964a21dc82750ffeab9dc082af3e92c65b630f09f3dc484da63a49378ee7cc2",
+  "generator_inputs": {
+    "development/tools/codegen.py": "78d2be1d9cd6e4fe5dc88d45a6ffb33c75f8023e5e4e73c6488c5359bc16326f",
+    "development/tools/entry_proof.py": "b107e626012b5ae4e6cf35c206c679e1d5c61bd5199f2e939c69c6d500f3e844",
+    "development/inputs/dispatch-seeds.txt": "ea362dba5fabecad60d4dd6e6a316d57c55b36a26c4b631badc22085db3bd6a1"
+  },
+  "files": {
+    "mojin_image.bin": {
+      "bytes": 2638020,
+      "sha256": "aa17cb3f96155592be82a9a0629ec876b61169e3dd3e7ab4e5d8b5e6da53d2f4"
+    },
+    "mojin_imports.toml": {
+      "bytes": 17665,
+      "sha256": "3700a151f33c336bb55d842124f91332e177cd7f175a4354ff569f0507801202"
+    },
+    "mojin_recomp.c": {
+      "bytes": 9451,
+      "sha256": "41713d7892f619f6dc059da1416d250a3f5db8bb2b0cb5f0b54b7179ffae6179"
+    },
+    "mojin_recomp_0.c": {
+      "bytes": 478762,
+      "sha256": "ac3bdfe1159009259804759055ef52cffff2430093c3253fde4c105dcaba054f"
+    },
+    "mojin_recomp_1.c": {
+      "bytes": 335811,
+      "sha256": "5965adf06b497189298efca210052a4f7a688df53ed81ee052b8e2883e66aca7"
+    },
+    "mojin_recomp_10.c": {
+      "bytes": 411711,
+      "sha256": "a0075debb5478cc1a68df9dd754c15a0b5781512c536328727b56eb07d8667c9"
+    },
+    "mojin_recomp_100.c": {
+      "bytes": 442462,
+      "sha256": "650afbdf4a00921df7d347dba299b19b4e5a7001425241c6aae3d26d7a135ff0"
+    },
+    "mojin_recomp_101.c": {
+      "bytes": 423906,
+      "sha256": "849b094a21824b8f6762491976b9edca3fcb9a882c6dffa15f4b207442f59c89"
+    },
+    "mojin_recomp_102.c": {
+      "bytes": 751524,
+      "sha256": "3765e005e6af22f1d6b660a15c3b739944b4dc41d14dc5bd53b703d957ecca63"
+    },
+    "mojin_recomp_103.c": {
+      "bytes": 406925,
+      "sha256": "0a8d2e24db4283a44e224fefed036979aa5f23b71afbbb28fabb39ac238cc926"
+    },
+    "mojin_recomp_104.c": {
+      "bytes": 166502,
+      "sha256": "5d610299dc14f4e4e6de0cad114cd1c84443209cd061d29fcf5910063646068e"
+    },
+    "mojin_recomp_105.c": {
+      "bytes": 252647,
+      "sha256": "f1f045a38d030a58f9721a5f972c841cfacdaa8d91a2c9f44cc26841b59fb25a"
+    },
+    "mojin_recomp_106.c": {
+      "bytes": 347981,
+      "sha256": "822c8407fcbced51f8bd6506fdef3309d2cd06e707a3b254d6e8c04075c314a9"
+    },
+    "mojin_recomp_107.c": {
+      "bytes": 355053,
+      "sha256": "dfe83e96b1336fbe6493ffaae25aa84ce16e6c5b30da7374f0a2ee50eac682c7"
+    },
+    "mojin_recomp_108.c": {
+      "bytes": 309744,
+      "sha256": "63af640d28cc68c36255f9346f21fefcf448597c82458aff36b628d303d35a1a"
+    },
+    "mojin_recomp_109.c": {
+      "bytes": 168478,
+      "sha256": "461dc32360626fd18240cff5bbc87867afcac2ebef9813110a264b56684ba07f"
+    },
+    "mojin_recomp_11.c": {
+      "bytes": 281347,
+      "sha256": "7ade6920d9f1caad5502a46e9e1d5ecdda4bef33c4fb5891fbc00baf0182d6fb"
+    },
+    "mojin_recomp_110.c": {
+      "bytes": 303550,
+      "sha256": "55beae49f5ea039cdcc09c70a2d92fb006debd7d47102f6f70e9f12bb7d9353e"
+    },
+    "mojin_recomp_111.c": {
+      "bytes": 564466,
+      "sha256": "d04645f9648cb1064e2698cf2bde611520656f9ab565d221e94e21b6d67f2b1e"
+    },
+    "mojin_recomp_112.c": {
+      "bytes": 260080,
+      "sha256": "97df8a3053dc2a3f0c74603636c051d7672c84178b1150fe6e1bee0bfeb0c62d"
+    },
+    "mojin_recomp_113.c": {
+      "bytes": 608453,
+      "sha256": "81d68687335d488d7bdc31b1d6159f9aedb9951b361951a1644677f114eb1654"
+    },
+    "mojin_recomp_114.c": {
+      "bytes": 929112,
+      "sha256": "c24fd2436bffeb0b6d83af56198bd8fe102a0ae284570a5489409996c346c59b"
+    },
+    "mojin_recomp_115.c": {
+      "bytes": 3606077,
+      "sha256": "08e459a7ea79a5d257d12a855e9ce4a1804a5c91446c247d08d4da654cd3c74a"
+    },
+    "mojin_recomp_116.c": {
+      "bytes": 193077,
+      "sha256": "d7fae682070dbdc9da31647956e6b49ba5ed46067a9a00f9602e80c9dfefcde8"
+    },
+    "mojin_recomp_117.c": {
+      "bytes": 302783,
+      "sha256": "dd97c0a2987340a143a2bc1f3e63a7465203581d15bffc4f1c46b4a00a6f51d4"
+    },
+    "mojin_recomp_118.c": {
+      "bytes": 197181,
+      "sha256": "51256d1350717a707d5f22554959db8444286e8e0f39d934bede58715465a1a7"
+    },
+    "mojin_recomp_119.c": {
+      "bytes": 570646,
+      "sha256": "53523bafeb19694a9b38d06f41820873b280afa672f03e66993986104b96b6d3"
+    },
+    "mojin_recomp_12.c": {
+      "bytes": 296251,
+      "sha256": "829ba70ec4dce2a8547ec43c26ac23e9216e3294494078ee8917b6af00cf1925"
+    },
+    "mojin_recomp_120.c": {
+      "bytes": 254412,
+      "sha256": "29e8384d1f15057fa4a29e971fb43dbc12c9051489ff84ad66d295e3bafaaa04"
+    },
+    "mojin_recomp_121.c": {
+      "bytes": 65993,
+      "sha256": "fe335074bff7d3573f8fe7e6e97e4b6583cc584d83dee079310f45b49fe1a1c6"
+    },
+    "mojin_recomp_122.c": {
+      "bytes": 11381,
+      "sha256": "08e40d351f2d0d1416fecbf0ff0999be3c66532717ac6368fa17f6aab5ddb247"
+    },
+    "mojin_recomp_123.c": {
+      "bytes": 11033,
+      "sha256": "d3432a6a4dd18d1db1766d9bb67c864b5a672aaf2496c70ef5c921306ef6b3a0"
+    },
+    "mojin_recomp_124.c": {
+      "bytes": 11260,
+      "sha256": "b0133462b3aad00b95a94c6904ab05e0d12839660af6b8956536383eebcfcd89"
+    },
+    "mojin_recomp_125.c": {
+      "bytes": 4973,
+      "sha256": "1cd06bfb88e169c2dfd4c467962e873d787491992a3e76a4c293c2194364ad15"
+    },
+    "mojin_recomp_13.c": {
+      "bytes": 275402,
+      "sha256": "a5e4cc49ea5c7e562dfa8666bb2e24673cac80ea4d372b3402bf2020a69e0c9b"
+    },
+    "mojin_recomp_14.c": {
+      "bytes": 336713,
+      "sha256": "db10ed3dcb93fdfd143bdae076510c55c6adec12bba1e6ef47da85ba41fac9a5"
+    },
+    "mojin_recomp_15.c": {
+      "bytes": 534737,
+      "sha256": "a9a7f48f046972bd57a066194691940cd8c7682780bb32ed924b5b951693108e"
+    },
+    "mojin_recomp_16.c": {
+      "bytes": 414792,
+      "sha256": "cb7460da7766441bb10b4167e7de671668494eda8f8da23c700657cd71ae3a7a"
+    },
+    "mojin_recomp_17.c": {
+      "bytes": 1072493,
+      "sha256": "07a1bf772a0a158695afbf456e8eed5bf0811e0318521c423428207ccc4a800a"
+    },
+    "mojin_recomp_18.c": {
+      "bytes": 219033,
+      "sha256": "48ee1d7ca57898819b0e2ccb8e1d6dc475e4aa3dbfb4f93cf0257ca1c62b2f31"
+    },
+    "mojin_recomp_19.c": {
+      "bytes": 290041,
+      "sha256": "fee31b00e3462cef88d63e8b1a177f0a9499d240584975ef7194a30d3704a7b4"
+    },
+    "mojin_recomp_2.c": {
+      "bytes": 577199,
+      "sha256": "fde987fd5064494495cb3bc98f5a4af1064837e986fb75a01fb8c18783fb1503"
+    },
+    "mojin_recomp_20.c": {
+      "bytes": 306169,
+      "sha256": "1e2300fd58488b8e37dd37a3aef4d1eb810f69c61e3b39e1720a06134799f4f1"
+    },
+    "mojin_recomp_21.c": {
+      "bytes": 615044,
+      "sha256": "287a1046218c1bac9a4179e1d395bc84faf6520d0a7754f1d2572a11988934a5"
+    },
+    "mojin_recomp_22.c": {
+      "bytes": 341658,
+      "sha256": "3736788135e9a59b1d6fa3a55f16f374fca64a2460aa613e37d98b4026174206"
+    },
+    "mojin_recomp_23.c": {
+      "bytes": 1040669,
+      "sha256": "6a0875c1b48bee5c925756e238792c93dd78875c677ba6e5492f32df7025b632"
+    },
+    "mojin_recomp_24.c": {
+      "bytes": 816418,
+      "sha256": "9ae78fb9cb11abe30da8d11271dff8a98f28917977cda72c13d58ee8a22721c1"
+    },
+    "mojin_recomp_25.c": {
+      "bytes": 255938,
+      "sha256": "42b0ef0c7ff29d9ca7cf6945c9304a8d5ccbb6c7435115b21809e5ae63f4bd9b"
+    },
+    "mojin_recomp_26.c": {
+      "bytes": 531736,
+      "sha256": "76a83c0f3ac1ec3beb0925674aebd24cd2205a1db79883ddb7ddcfd1a8b3f6ed"
+    },
+    "mojin_recomp_27.c": {
+      "bytes": 581591,
+      "sha256": "551c896284204125ed6fdce5fb98bd055ec29b023fcc2cee3fc8444cd754c2f3"
+    },
+    "mojin_recomp_28.c": {
+      "bytes": 610214,
+      "sha256": "7754b80733d122433b0f7ea92842d3ca82b092404a030838b01dcbe4a26ae20b"
+    },
+    "mojin_recomp_29.c": {
+      "bytes": 691194,
+      "sha256": "1106aa6ae878122c7cf43cd24f53b653eea596b4b9b1bb0dc84aa9fb13fb00a2"
+    },
+    "mojin_recomp_3.c": {
+      "bytes": 422817,
+      "sha256": "e35b9ec3897f2188efcceb749dc1b9a68bcb3ef291b16e5ec7cb42da02834411"
+    },
+    "mojin_recomp_30.c": {
+      "bytes": 375314,
+      "sha256": "668c7d653a7c5493099ebed80cfa70b8dcfc88167162d1dd1f336083f8531c4e"
+    },
+    "mojin_recomp_31.c": {
+      "bytes": 2273164,
+      "sha256": "e2b4cb6db657d6b51ee99db0b8bbe90b51ef172be810b00d6719ecc211f64a6b"
+    },
+    "mojin_recomp_32.c": {
+      "bytes": 605590,
+      "sha256": "0193ea308024c852fd98c36bc3d18a4ee054ac13f33f01703da06cb189f839b5"
+    },
+    "mojin_recomp_33.c": {
+      "bytes": 297811,
+      "sha256": "be9df59f60861e978ac14a465c21d3cb476031a97b6eec0230a25369f647e5dd"
+    },
+    "mojin_recomp_34.c": {
+      "bytes": 526688,
+      "sha256": "e6c3c901767e0807fa3084271e8ba113d7c202fe0a4e065cce4a4ab8632595de"
+    },
+    "mojin_recomp_35.c": {
+      "bytes": 569583,
+      "sha256": "b6212e513aed30291d3ee470109dede23d989d1b5f03829d95e94a5c0dc00f56"
+    },
+    "mojin_recomp_36.c": {
+      "bytes": 457091,
+      "sha256": "a809b4bbdce3674eef0354209684b2b5b8576a5681cf0e2f58a1cf744c9937a2"
+    },
+    "mojin_recomp_37.c": {
+      "bytes": 384355,
+      "sha256": "4cd9d9604d13c4d4f195af4e9ca5d61003fb38a0a2def0ac5dd2eaa68c22a5fb"
+    },
+    "mojin_recomp_38.c": {
+      "bytes": 607432,
+      "sha256": "3703e9319e3e3d988c34c5a6b437fc20c81e48f0b64f230b94937b6d1fb8025e"
+    },
+    "mojin_recomp_39.c": {
+      "bytes": 559215,
+      "sha256": "58f8978e053c3edaa1f3c7ed8d470fff45799b8021b05467d1292039ec62b7d2"
+    },
+    "mojin_recomp_4.c": {
+      "bytes": 257070,
+      "sha256": "0022ca5b0521652bf6910770c014cb847aca24def1db21ab59e315807bb5dace"
+    },
+    "mojin_recomp_40.c": {
+      "bytes": 436446,
+      "sha256": "24e8dad8a8fabcb0e2785797b4d5e9c3e406528299e8403790aa4445d9c14faa"
+    },
+    "mojin_recomp_41.c": {
+      "bytes": 606548,
+      "sha256": "6761ac02ecc3ce5e96ca70b294aecb20180245194ff4262bd5e13f3da4a353c4"
+    },
+    "mojin_recomp_42.c": {
+      "bytes": 239472,
+      "sha256": "5116e8d1a9987fa240b297f6bffb373c5ed8d21c34ab31b449785175d4b91feb"
+    },
+    "mojin_recomp_43.c": {
+      "bytes": 761520,
+      "sha256": "8a9f98c722c8c6c36c3afe3ec7026e6e73cb477dc0b14dc17c623a5ec1ba7aba"
+    },
+    "mojin_recomp_44.c": {
+      "bytes": 478204,
+      "sha256": "6f30d700f7257c98804c51cff6e3539f3d6a39bfb9ad20542b3d92f628288c40"
+    },
+    "mojin_recomp_45.c": {
+      "bytes": 413982,
+      "sha256": "c002e8d6fcae942eca9794dc0404fbc859ef7f6a8542c648131977043c3f8659"
+    },
+    "mojin_recomp_46.c": {
+      "bytes": 681578,
+      "sha256": "91b80318da6ef527032f6b34f282f14ac33cf2d46e0f780a2914d613561a34c9"
+    },
+    "mojin_recomp_47.c": {
+      "bytes": 469795,
+      "sha256": "a3d420f860ceb8ae28bfc268306237e894a441393b3378a1b276b9f01f02f480"
+    },
+    "mojin_recomp_48.c": {
+      "bytes": 321751,
+      "sha256": "2af8fe80d20fda31d73619d478c36451f4feef7585ad7dc6d176b68a67beeb9f"
+    },
+    "mojin_recomp_49.c": {
+      "bytes": 562012,
+      "sha256": "707fff7b53704988fc2223178a309503744c1c741d71924fab4be221a43a7d34"
+    },
+    "mojin_recomp_5.c": {
+      "bytes": 114859,
+      "sha256": "6bb77895b3bea75e36aededaf9402d4a5efc3b0f3b8984d4ca86b9a07a7cf55a"
+    },
+    "mojin_recomp_50.c": {
+      "bytes": 589061,
+      "sha256": "31230e609b989a7645d7257835ec9b7224f078f7cd9c2e9d6a275525c82660e9"
+    },
+    "mojin_recomp_51.c": {
+      "bytes": 399217,
+      "sha256": "5aca56a5d1ecb114caa74a9f4854fec02aac88be14591bddeefd7380cb4399f6"
+    },
+    "mojin_recomp_52.c": {
+      "bytes": 613865,
+      "sha256": "2dbc30d81e2b7f4d16305a0682346f501b28e9dc88743bb491c7d93418dd517b"
+    },
+    "mojin_recomp_53.c": {
+      "bytes": 159368,
+      "sha256": "25d7e2ce0fe95abe0258eec9983c4b2b14af0a05590cd1005da43ce8450b9167"
+    },
+    "mojin_recomp_54.c": {
+      "bytes": 261540,
+      "sha256": "a84f14f1c46d2e4dc0e4820e776d13686ea0596bdd52b9e6f29144707c7c63a8"
+    },
+    "mojin_recomp_55.c": {
+      "bytes": 310073,
+      "sha256": "d852da4329c98baa0a90740346f94aa4f4a1fad2a7633588955f525794183d55"
+    },
+    "mojin_recomp_56.c": {
+      "bytes": 201224,
+      "sha256": "49f555f5f9eff0719a99cf9fd9cdc33854b92f831fcbd79e129614b866d57c11"
+    },
+    "mojin_recomp_57.c": {
+      "bytes": 339165,
+      "sha256": "4bfce57e9e3885f9efc12276f3fd334f451f9d20b63016e96dd1848149078e8c"
+    },
+    "mojin_recomp_58.c": {
+      "bytes": 368250,
+      "sha256": "6c5eaf6a8ae4ddaf5a1f337b099a9996260c68c441748694cc28577fcb54c7fc"
+    },
+    "mojin_recomp_59.c": {
+      "bytes": 560373,
+      "sha256": "5b063e506d3943e21f536d0f8fe57b8ad715a84cf9b623a484b00ee9c031d932"
+    },
+    "mojin_recomp_6.c": {
+      "bytes": 566483,
+      "sha256": "41f346357ad6b0d4f0144e4e7c75325888c2d8baa4cfd2059975294144253993"
+    },
+    "mojin_recomp_60.c": {
+      "bytes": 253046,
+      "sha256": "0caa8dc4354a102b8fa4339dd39457a34807666b9d906b90871b8dde56fb6b27"
+    },
+    "mojin_recomp_61.c": {
+      "bytes": 185100,
+      "sha256": "1195948dc6fadb900d8cc67b6dcd967eb21bc345db0eebe6abfb3bcc2fc79e02"
+    },
+    "mojin_recomp_62.c": {
+      "bytes": 474477,
+      "sha256": "1fa0d2bfb900b72b37630c772216208c72a1979a509bd2d9e502235c50e08889"
+    },
+    "mojin_recomp_63.c": {
+      "bytes": 619820,
+      "sha256": "f81e9e569936551119c266baf9117b3de6bb7c0a5d047a724e4c3af03edfdfed"
+    },
+    "mojin_recomp_64.c": {
+      "bytes": 244552,
+      "sha256": "252ef2129948bec7472c526aed1ddc2f64052c8c1ea6a9d7e924458018975bc9"
+    },
+    "mojin_recomp_65.c": {
+      "bytes": 333449,
+      "sha256": "380f0413094ef8d061f2bee4d7c7858b1d811f7a8eedd5984ac28bb189d71bdf"
+    },
+    "mojin_recomp_66.c": {
+      "bytes": 211949,
+      "sha256": "de1bf4f44ac0983a0c3d5d47adb84cf305187fd47cfb8bcc53c5eca8a855d315"
+    },
+    "mojin_recomp_67.c": {
+      "bytes": 220337,
+      "sha256": "79ff7f997a1f101d23c6564715724efa5b6221a6fe2124b34a55c76e60f0fab1"
+    },
+    "mojin_recomp_68.c": {
+      "bytes": 246648,
+      "sha256": "2311893085853bf7bc68d748ca50b46f3eed7ce2b21227864ed48616852bb9e9"
+    },
+    "mojin_recomp_69.c": {
+      "bytes": 259955,
+      "sha256": "bac451c38fb47af9364d6cf1f662a6a51eb8f20fac632fc68e209e57bd9f7c10"
+    },
+    "mojin_recomp_7.c": {
+      "bytes": 548997,
+      "sha256": "e200ec2d5f669d5049bb854a0252f3b4f7ac9024631fac266dceb2f11e7e45af"
+    },
+    "mojin_recomp_70.c": {
+      "bytes": 184259,
+      "sha256": "b468cbd2c42302ca2477f6531441fad0f05af6f1e1b5637c0f4efd5489a6e7cb"
+    },
+    "mojin_recomp_71.c": {
+      "bytes": 529689,
+      "sha256": "c5518eb4342eb0cb58e3ac40527f3a1498818ce4d5e49b61215b4be60fa2e813"
+    },
+    "mojin_recomp_72.c": {
+      "bytes": 255543,
+      "sha256": "047ef9066c8861cbdf24a34b9990150b4759268fd375c4b9c5a8d10690c4d5af"
+    },
+    "mojin_recomp_73.c": {
+      "bytes": 579769,
+      "sha256": "3c8dc205b28561018858bfbb983adb14795bb4bd946154ee2bef7f5b03f19915"
+    },
+    "mojin_recomp_74.c": {
+      "bytes": 389739,
+      "sha256": "07534bb642022659599b93d3ccdcdd3bdfedc914a0712d8060a22f60bafe5b92"
+    },
+    "mojin_recomp_75.c": {
+      "bytes": 186786,
+      "sha256": "69204aae5c839ef924c4d75d90155275c564b2257d120589168396a2af83c4a5"
+    },
+    "mojin_recomp_76.c": {
+      "bytes": 470232,
+      "sha256": "f857866b520fb8fbb12b9075fd7eb00274e02b2b83a5075c371a472ba9178688"
+    },
+    "mojin_recomp_77.c": {
+      "bytes": 895800,
+      "sha256": "859474f54fba4b33608813e4cc8ada11fe3fa76b5a6e0a775082dacf33049885"
+    },
+    "mojin_recomp_78.c": {
+      "bytes": 646500,
+      "sha256": "f845fc6bbf506b60988390e32c35b3a6fdb92ea34537d6f4b0d1ecb9fbd30b87"
+    },
+    "mojin_recomp_79.c": {
+      "bytes": 422971,
+      "sha256": "0917996abfebf89b319758d89dd372b802f47c0e31ee03949d14b1fd02035e22"
+    },
+    "mojin_recomp_8.c": {
+      "bytes": 327565,
+      "sha256": "ca91df82aded01fd9a490970536906858b8ab8555b326fadb460928a0da37ada"
+    },
+    "mojin_recomp_80.c": {
+      "bytes": 194063,
+      "sha256": "dc31ef767fd44d7e7f9aebdb68c4cae50f83fdd004e731197470831417cbaadf"
+    },
+    "mojin_recomp_81.c": {
+      "bytes": 477868,
+      "sha256": "3cd2a71ec709f963ddb6461f9cd199cc3d65398373dcd156fc88e803da490603"
+    },
+    "mojin_recomp_82.c": {
+      "bytes": 258085,
+      "sha256": "a0d31fb2d9df4ae255e29423be577c910c58cf885ca095886951f1e2395df7d4"
+    },
+    "mojin_recomp_83.c": {
+      "bytes": 202463,
+      "sha256": "c526e1421c712a72388a136f9e1b4392616ac2c7cccdc6d7b6456f9328ee68bf"
+    },
+    "mojin_recomp_84.c": {
+      "bytes": 286346,
+      "sha256": "df4857c4c1def7a5b8058e9b8d822b4f6844bdd7dface3a5948190e54e934bd4"
+    },
+    "mojin_recomp_85.c": {
+      "bytes": 349642,
+      "sha256": "2456c292b16e41e29b81df78511104b37fc03b5d385ceeed5149678498cc3ac2"
+    },
+    "mojin_recomp_86.c": {
+      "bytes": 443861,
+      "sha256": "9ff67047c177a44c45a0df3bbcf6652514dea9054aab96ff8b598b6c8e5b6ed5"
+    },
+    "mojin_recomp_87.c": {
+      "bytes": 884571,
+      "sha256": "5c9910d84cc27a5d44d517386f500fe58ec49055403587f97d259877ad35a506"
+    },
+    "mojin_recomp_88.c": {
+      "bytes": 659953,
+      "sha256": "a4bee2216c86628a72d35f661ca0230dc8980f3260b12265af52e4fe3a5e7eb2"
+    },
+    "mojin_recomp_89.c": {
+      "bytes": 249080,
+      "sha256": "50c843ec3080c3d384bee3b043e90c477d00734e34f8415305cf09b9affc6f80"
+    },
+    "mojin_recomp_9.c": {
+      "bytes": 801321,
+      "sha256": "a39091c06978a8ea22287eff40a90151bc51d6e8dd947fb47b8c3de072c52593"
+    },
+    "mojin_recomp_90.c": {
+      "bytes": 358645,
+      "sha256": "46642bbc4efe6587daa2ab4cfc7b92d00234fd87b5717343df9796d0990a346d"
+    },
+    "mojin_recomp_91.c": {
+      "bytes": 974612,
+      "sha256": "c332f4c8db9b4d3ec5242926f7b5fe8db70ea3897a83dfb83b7a5a0a280ef715"
+    },
+    "mojin_recomp_92.c": {
+      "bytes": 328664,
+      "sha256": "71cfeaeefb81fc494e494d616681c5111e6870ee134d57ac9758fba4973c86ef"
+    },
+    "mojin_recomp_93.c": {
+      "bytes": 318654,
+      "sha256": "d202090dd59cfaeb7a9fd909d5d81ff6bc41f85df74bb10d981f32fefe28d869"
+    },
+    "mojin_recomp_94.c": {
+      "bytes": 942616,
+      "sha256": "a2dd99c7c10c28e9a7ae527a99473e0677aa6eb6771977e31e6e9fa5ff3f3b1d"
+    },
+    "mojin_recomp_95.c": {
+      "bytes": 315128,
+      "sha256": "004d8691a64d8e53ed00f28fca786e7886512f314fee4fb6dccc297eedf90a34"
+    },
+    "mojin_recomp_96.c": {
+      "bytes": 374788,
+      "sha256": "aa46e716cfdbd2616e2dae4b6c251c392dc0e4a2c8b5bb8ba4bef1a939f8f175"
+    },
+    "mojin_recomp_97.c": {
+      "bytes": 252703,
+      "sha256": "f5a3baec6f8e82c34897ef760cf424383e88d75a081e18fca3a57bd425c7c6eb"
+    },
+    "mojin_recomp_98.c": {
+      "bytes": 313007,
+      "sha256": "8080fddd8f65717306a14b658f92723cf0fa4948933a74bf10b434d98374afac"
+    },
+    "mojin_recomp_99.c": {
+      "bytes": 475933,
+      "sha256": "f38390c1260a43fae24fe4c2ab74d8a79b2951b24fdbae5ade15a133120eb7bd"
+    },
+    "mojin_recomp_coverage.json": {
+      "bytes": 1093,
+      "sha256": "c2881ee177cc17b65b5bfdb33589805ad30afd0104c278f00585b8e55607eef2"
+    },
+    "mojin_recomp_funcs.h": {
+      "bytes": 241112,
+      "sha256": "208fcadf8d24074ec7cbc256c9111bb8d822a1ddda63d1a7f02c1e2cbd513cc5"
+    },
+    "mojin_recomp_opt.mk": {
+      "bytes": 159,
+      "sha256": "a8734d646d53ca9736e8580705d754c116d4acda015f786f1cd5b4a61c878e1e"
+    },
+    "mojin_recomp_stubs.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "source_build_sha256": "b2231886d6e9c5005eb6672be51ce76a15fb52e42693384438588e5bd053267a",
+  "source_executable_sha256": "6862536420a0bdb9c90f16f3d101e47eafddb3e062eb6d99207ee82074e3bad3",
+  "notice": "Derived game code and data. This manifest grants no redistribution rights."
+}

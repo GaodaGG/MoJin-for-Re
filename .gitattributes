@@ -1,0 +1,6 @@
+# Preserve source bytes: generator provenance and renderer pins hash exact files.
+* -text
+* whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+*.md text eol=lf
+development/resources/game/** filter=lfs diff=lfs merge=lfs -text
+development/prepared/game/mojin_image.bin filter=lfs diff=lfs merge=lfs -text

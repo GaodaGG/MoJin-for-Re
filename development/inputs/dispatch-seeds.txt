@@ -1,0 +1,7 @@
+# nakagawa-miss-seeds-v1
+# Private analysis input for ULJS00329 / ELF SHA-256
+# 0a25b484b3b324879d2d951172bf44aff8b13bf11bb6a958ff060be8ea4b8b12
+# This is an entry seed, not a guest instruction patch or runtime bypass.
+# 08934190 (round function) + 0x10 at 08934134 reaches 089341a0.
+# Existing discovery incorrectly starts this block at the preceding NOP, 0893419c.
+0x089341a0 run=20261116T161028425246Z

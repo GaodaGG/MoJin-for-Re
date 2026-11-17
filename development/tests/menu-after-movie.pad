@@ -1,0 +1,4 @@
+# Diagnostic input only. Fresh private save. Wait for OP to present before skip.
+# Absolute vblank, PSP buttons, vblank width (extended if unread). No automatic input.
+1800 START 4
+3000 START 4

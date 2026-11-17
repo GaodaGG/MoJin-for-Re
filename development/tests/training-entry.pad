@@ -1,0 +1,16 @@
+# Confirmed main-menu route: Story -> vs CPU -> Training (menu-survey evidence).
+1800 START 4
+3000 START 4
+3200 DOWN 4
+3500 DOWN 4
+3800 CIRCLE 4
+4200 CIRCLE 4
+4600 CIRCLE 4
+5000 CIRCLE 4
+5400 CIRCLE 4
+5800 CIRCLE 4
+6200 CIRCLE 4
+6600 CIRCLE 4
+7000 CIRCLE 4
+# Inspect the game's own training pause/settings after entry, not desktop keys.
+9200 START 4

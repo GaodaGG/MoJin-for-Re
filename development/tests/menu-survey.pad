@@ -1,0 +1,8 @@
+# Inspect visible main-menu choices without selecting a game mode.
+1800 START 4
+3000 START 4
+3200 DOWN 4
+3500 DOWN 4
+3800 DOWN 4
+4100 DOWN 4
+4400 DOWN 4

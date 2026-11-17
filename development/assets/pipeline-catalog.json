@@ -1,0 +1,191 @@
+{
+  "schema": 1,
+  "fields": [
+    "blend_on",
+    "srcf",
+    "dstf",
+    "eq",
+    "cull",
+    "ztest",
+    "zwrite",
+    "zfunc",
+    "cmask",
+    "tnl",
+    "azero",
+    "zbias"
+  ],
+  "shader_set": "693dd8b59c1c1ddf",
+  "input_iso_sha256": "40469759cf0f033f8610f7920ab09b1866040d80b46ff0bdb16b03dfd137b9cb",
+  "source_runs": [
+    {
+      "run": "development\\tests\\runs\\20261116T195228716731Z",
+      "run_sha256": "092b9a6c38478cb378ee966a1a1fb5af8a7f5b5cbaf99111063c8fcdeaba9dd7",
+      "trace_sha256": "af71b5263cfa80463b647b5721216c7ecb0dd457ae82949fbfff1e3c6785ed40",
+      "executable_sha256": "010ccb161e4adc500fb5ec3104b9e00e890d11eb8a638d5034ed5f56d360fd54",
+      "image_sha256": "aa17cb3f96155592be82a9a0629ec876b61169e3dd3e7ab4e5d8b5e6da53d2f4"
+    }
+  ],
+  "renderer_inputs": {
+    "development/third_party/nakagawa/src/rt/gpu_sdl3vk/ge_gpu.c": "df8303e3ea83188cee4765848de2e42d69877be288c63be3a465a60d71120db5",
+    "development/third_party/nakagawa/src/rt/gpu_sdl3vk/psp_vert.inc": "52bedcef06b4eb86f8bbf02f26aeafa4efffd719aa9cbbe0f1643b21c9583944",
+    "development/third_party/nakagawa/src/rt/gpu_sdl3vk/psp_frag.inc": "b1255d1add308738819b21f3048c41c124e44eeb7ff5c4f95e840268f284c629",
+    "development/third_party/nakagawa/src/rt/gpu_sdl3vk/psp_frag_rmw.inc": "da920c486dd74d1341675d825f3f0a55989f7bfd7bb0fbbb43d33a07eae4c624",
+    "development/third_party/nakagawa/src/rt/gpu_sdl3vk/psp_tnl_vert.inc": "400bf51cb15cc92cbc063cd7af8f09599d5f9f45403f4d5f84f7a729ca4a13c3"
+  },
+  "scope": "Opening, menus, and one night-bridge vs-CPU battle. Other effects use normal misses; no all-game coverage claim.",
+  "pipelines": [
+    {
+      "key": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        7,
+        7,
+        0,
+        0,
+        0
+      ],
+      "rmw": 1
+    },
+    {
+      "key": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        7,
+        15,
+        0,
+        0,
+        0
+      ],
+      "rmw": 1
+    },
+    {
+      "key": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        6,
+        7,
+        0,
+        0,
+        0
+      ],
+      "rmw": 1
+    },
+    {
+      "key": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        6,
+        7,
+        0,
+        0,
+        0
+      ],
+      "rmw": 0
+    },
+    {
+      "key": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        7,
+        15,
+        0,
+        0,
+        0
+      ],
+      "rmw": 0
+    },
+    {
+      "key": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        0,
+        6,
+        7,
+        0,
+        0,
+        0
+      ],
+      "rmw": 1
+    },
+    {
+      "key": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        0,
+        7,
+        7,
+        0,
+        0,
+        0
+      ],
+      "rmw": 0
+    },
+    {
+      "key": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        0,
+        7,
+        7,
+        0,
+        0,
+        0
+      ],
+      "rmw": 1
+    },
+    {
+      "key": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        1,
+        6,
+        7,
+        0,
+        0,
+        0
+      ],
+      "rmw": 0
+    }
+  ]
+}

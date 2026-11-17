@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "input_iso_sha256": "40469759cf0f033f8610f7920ab09b1866040d80b46ff0bdb16b03dfd137b9cb",
+  "physical_bytes": 270845952,
+  "entries": [
+    {
+      "path": "PSP_GAME",
+      "lba": 23,
+      "size": 2048,
+      "directory": true
+    },
+    {
+      "path": "PSP_GAME/ICON0.PNG",
+      "lba": 1478,
+      "size": 25423,
+      "directory": false,
+      "sha256": "637e76491fa2b519695bba09d1862f945317184c2ef1ec815575c4f79b23cc46"
+    },
+    {
+      "path": "PSP_GAME/INSDIR",
+      "lba": 24,
+      "size": 2048,
+      "directory": true
+    },
+    {
+      "path": "PSP_GAME/PARAM.SFO",
+      "lba": 1491,
+      "size": 556,
+      "directory": false,
+      "sha256": "37845f75af1ecbb6cbf4f026f5743ddd6086d8e2276b844914550523a3c4e3ba"
+    },
+    {
+      "path": "PSP_GAME/PIC1.PNG",
+      "lba": 1388,
+      "size": 183881,
+      "directory": false,
+      "sha256": "eeb800fe8f8cd7905ec451a1738befe1fc5b38f15bc8c8d8ae3f56749ad775f0"
+    },
+    {
+      "path": "PSP_GAME/SND0.AT3",
+      "lba": 132127,
+      "size": 248660,
+      "directory": false,
+      "sha256": "8618c2200a83949a1fe7b4ed2866bd65565df5cb22841ad0f24f9de781fa5f28"
+    },
+    {
+      "path": "PSP_GAME/SYSDIR",
+      "lba": 25,
+      "size": 2048,
+      "directory": true
+    },
+    {
+      "path": "PSP_GAME/SYSDIR/BOOT.BIN",
+      "lba": 1492,
+      "size": 2780300,
+      "directory": false,
+      "sha256": "215f5a150dbec38af286c01a5b9b4d08b096eeec7ea42c18b9f02cb90cec57c4"
+    },
+    {
+      "path": "PSP_GAME/SYSDIR/EBOOT.BIN",
+      "lba": 30,
+      "size": 2780300,
+      "directory": false,
+      "sha256": "0a25b484b3b324879d2d951172bf44aff8b13bf11bb6a958ff060be8ea4b8b12"
+    },
+    {
+      "path": "PSP_GAME/SYSDIR/OPNSSMP.BIN",
+      "lba": 29,
+      "size": 880,
+      "directory": false,
+      "sha256": "c4ebace3c757b984b8ed90a45de19e9ef8531d4cde4c6078e6e8a468b91b37e9"
+    },
+    {
+      "path": "PSP_GAME/SYSDIR/UPDATE",
+      "lba": 27,
+      "size": 2048,
+      "directory": true
+    },
+    {
+      "path": "PSP_GAME/USRDIR",
+      "lba": 26,
+      "size": 2048,
+      "directory": true
+    },
+    {
+      "path": "PSP_GAME/USRDIR/ADV.BIN",
+      "lba": 31846,
+      "size": 796672,
+      "directory": false,
+      "sha256": "04d4a4ee6ca2fb14b387c4307ab6d660fe0b2b25d984ce824bdb7883976b9293"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/AMW.PMF",
+      "lba": 124265,
+      "size": 1101824,
+      "directory": false,
+      "sha256": "1491793e391dad342cea01ba3064fd34036084d27efc6cb4e700bfda6e55b203"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/DAT.BIN",
+      "lba": 32235,
+      "size": 595968,
+      "directory": false,
+      "sha256": "9dbac1e0c130f6cb88608bf25bbc395c335c5b39af2e0a880f5fb2bb7f95003f"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/EVT.BIN",
+      "lba": 2850,
+      "size": 237568,
+      "directory": false,
+      "sha256": "2d4b92447f1443188f8a26c2f9248d066c34422af0e5b6a3a4afc1487a475b88"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/FARC.BIN",
+      "lba": 2966,
+      "size": 15132672,
+      "directory": false,
+      "sha256": "4c89b1970f5f22865995ac6b6fca1f8ee0001c38b5f804bdcf2469c597bec613"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/GRP.BIN",
+      "lba": 10355,
+      "size": 27811840,
+      "directory": false,
+      "sha256": "fa8a3401378c59b8ee4453adc1bab66905326e7f4033c09c7129ce4322045b77"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/ICON0.PNG",
+      "lba": 116875,
+      "size": 25423,
+      "directory": false,
+      "sha256": "637e76491fa2b519695bba09d1862f945317184c2ef1ec815575c4f79b23cc46"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/MCB0.BLN",
+      "lba": 23935,
+      "size": 4096,
+      "directory": false,
+      "sha256": "cc90289b0433295eb0d66186fb126c1a0244c93784589a9aaa40f4f6cde146ef"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/MCB1.BLN",
+      "lba": 23937,
+      "size": 16197632,
+      "directory": false,
+      "sha256": "1a01160ce16ec75caf3f05ab2fa78af8b6a37f7eefe495f7e5650555ff4a535b"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/OP.PMF",
+      "lba": 116981,
+      "size": 14917632,
+      "directory": false,
+      "sha256": "d84ad6a7194a22f9307f41c7602c9a9ddf42df86fa10ddc05b823a62f74e736c"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/PIC1.PNG",
+      "lba": 116888,
+      "size": 189414,
+      "directory": false,
+      "sha256": "25cb2409fb6d150d9534d5a521bb910a0835710dbbd860184a5c99e2373cf81e"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/PSPBGM.BIN",
+      "lba": 32526,
+      "size": 22953984,
+      "directory": false,
+      "sha256": "8358e9748b0955ce8c491c184e5ce59fa44213ed1f863a61eab1f3d515fc5953"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/PSPSND.BIN",
+      "lba": 43734,
+      "size": 149792768,
+      "directory": false,
+      "sha256": "a5c02b79a2b10f933a0eee4d2ac48abc4c456e8a50794267c2b6354e1139b91a"
+    },
+    {
+      "path": "PSP_GAME/USRDIR/STAFF_ROLL.PMF",
+      "lba": 124803,
+      "size": 14999552,
+      "directory": false,
+      "sha256": "69c5d3c76f536895b1164666383eaaa6e650b3df856e111fa92c75f96dd65eda"
+    },
+    {
+      "path": "UMD_DATA.BIN",
+      "lba": 28,
+      "size": 48,
+      "directory": false,
+      "sha256": "35b4ba3a7a87c80c1459b10c9954e029a9a22c850e5afe63f57f48cc2293d7e1"
+    }
+  ],
+  "runtime": "Loose immutable files; original LBA retained only as file-access metadata. Unmapped raw disk reads fail explicitly."
+}

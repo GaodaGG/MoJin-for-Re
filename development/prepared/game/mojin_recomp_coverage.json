@@ -1,0 +1,43 @@
+{
+  "images": [
+    {
+      "executable_bytes": 1486872,
+      "executable_words": 371718,
+      "functions": 8028,
+      "functions_interpreter": 0,
+      "functions_translated": 8028,
+      "image": "executable",
+      "interior_entry_words": 456,
+      "interpreter_words": 0,
+      "jump_table_candidates": 7606,
+      "other_owned_words": 0,
+      "owned_bytes": 1486504,
+      "owned_words": 371626,
+      "owner_conflict_words": 15520,
+      "padding_words": 17,
+      "schema_version": 1,
+      "translated_words": 371626,
+      "unowned_bytes": 300,
+      "unowned_words": 75,
+      "unresolved_indirect_edges": 1435
+    }
+  ],
+  "miss_seeds": {
+    "0x089341a0": "applied"
+  },
+  "schema_version": 1,
+  "total": {
+    "executable_words": 371718,
+    "functions": 8028,
+    "functions_interpreter": 0,
+    "functions_translated": 8028,
+    "interpreter_words": 0,
+    "jump_table_candidates": 7606,
+    "other_owned_words": 0,
+    "owned_words": 371626,
+    "translated_share": 1.0,
+    "translated_words": 371626,
+    "unowned_words": 75,
+    "unresolved_indirect_edges": 1435
+  }
+}

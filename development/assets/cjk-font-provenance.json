@@ -1,0 +1,20 @@
+{
+  "project": "notofonts/noto-cjk",
+  "version": "Sans2.004",
+  "revision": "523d033d6cb47f4a80c58a35753646f5c3608a78",
+  "license": "SIL Open Font License 1.1",
+  "files": [
+    {
+      "path": "development/assets/fonts/ui/noto-sans-sc/NotoSansCJKsc-Regular.otf",
+      "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf",
+      "bytes": 16437364,
+      "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+    },
+    {
+      "path": "development/assets/fonts/ui/noto-sans-sc/OFL.txt",
+      "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/523d033d6cb47f4a80c58a35753646f5c3608a78/LICENSE",
+      "bytes": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    }
+  ]
+}

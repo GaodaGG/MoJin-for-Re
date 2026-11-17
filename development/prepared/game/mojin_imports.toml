@@ -1,0 +1,1296 @@
+# Import map emitted by tools/imports.py: stub address -> (library, NID).
+
+[[import]]
+stub = 0x0896e80c
+lib = "IoFileMgrForUser"
+nid = 0x42ec03ac
+
+[[import]]
+stub = 0x0896e814
+lib = "IoFileMgrForUser"
+nid = 0x63632449
+
+[[import]]
+stub = 0x0896e81c
+lib = "IoFileMgrForUser"
+nid = 0x6a638d83
+
+[[import]]
+stub = 0x0896e824
+lib = "IoFileMgrForUser"
+nid = 0x810c4bc3
+
+[[import]]
+stub = 0x0896e82c
+lib = "IoFileMgrForUser"
+nid = 0x89aa9906
+
+[[import]]
+stub = 0x0896e834
+lib = "IoFileMgrForUser"
+nid = 0xa0b5a7c2
+
+[[import]]
+stub = 0x0896e83c
+lib = "IoFileMgrForUser"
+nid = 0xace946e8
+
+[[import]]
+stub = 0x0896e844
+lib = "IoFileMgrForUser"
+nid = 0xe23eec33
+
+[[import]]
+stub = 0x0896e84c
+lib = "IoFileMgrForUser"
+nid = 0x109f50bc
+
+[[import]]
+stub = 0x0896e854
+lib = "IoFileMgrForUser"
+nid = 0x27eb27b8
+
+[[import]]
+stub = 0x0896e85c
+lib = "IoFileMgrForUser"
+nid = 0x3251ea56
+
+[[import]]
+stub = 0x0896e864
+lib = "IoFileMgrForUser"
+nid = 0x35dbd746
+
+[[import]]
+stub = 0x0896e86c
+lib = "IoFileMgrForUser"
+nid = 0x779103a0
+
+[[import]]
+stub = 0x0896e874
+lib = "Kernel_Library"
+nid = 0x092968f4
+
+[[import]]
+stub = 0x0896e87c
+lib = "Kernel_Library"
+nid = 0xa089eca4
+
+[[import]]
+stub = 0x0896e884
+lib = "Kernel_Library"
+nid = 0xbea46419
+
+[[import]]
+stub = 0x0896e88c
+lib = "Kernel_Library"
+nid = 0x15b6446b
+
+[[import]]
+stub = 0x0896e894
+lib = "Kernel_Library"
+nid = 0x1839852a
+
+[[import]]
+stub = 0x0896e89c
+lib = "Kernel_Library"
+nid = 0x1fc64e09
+
+[[import]]
+stub = 0x0896e8a4
+lib = "Kernel_Library"
+nid = 0x293b45b8
+
+[[import]]
+stub = 0x0896e8ac
+lib = "Kernel_Library"
+nid = 0x5f10d406
+
+[[import]]
+stub = 0x0896e8b4
+lib = "LoadExecForUser"
+nid = 0x05572a5f
+
+[[import]]
+stub = 0x0896e8bc
+lib = "LoadExecForUser"
+nid = 0x4ac57943
+
+[[import]]
+stub = 0x0896e8c4
+lib = "ModuleMgrForUser"
+nid = 0xd8b73127
+
+[[import]]
+stub = 0x0896e8cc
+lib = "ModuleMgrForUser"
+nid = 0x2e0911aa
+
+[[import]]
+stub = 0x0896e8d4
+lib = "ModuleMgrForUser"
+nid = 0xd1ff982a
+
+[[import]]
+stub = 0x0896e8dc
+lib = "ModuleMgrForUser"
+nid = 0xf0a26395
+
+[[import]]
+stub = 0x0896e8e4
+lib = "ModuleMgrForUser"
+nid = 0x8f2df740
+
+[[import]]
+stub = 0x0896e8ec
+lib = "StdioForUser"
+nid = 0x172d316e
+
+[[import]]
+stub = 0x0896e8f4
+lib = "StdioForUser"
+nid = 0xa6bab2e9
+
+[[import]]
+stub = 0x0896e8fc
+lib = "StdioForUser"
+nid = 0xf78ba90a
+
+[[import]]
+stub = 0x0896e904
+lib = "SysMemUserForUser"
+nid = 0x13a5abef
+
+[[import]]
+stub = 0x0896e90c
+lib = "SysMemUserForUser"
+nid = 0xf77d77cb
+
+[[import]]
+stub = 0x0896e914
+lib = "SysMemUserForUser"
+nid = 0x1b4217bc
+
+[[import]]
+stub = 0x0896e91c
+lib = "SysMemUserForUser"
+nid = 0x237dbd4f
+
+[[import]]
+stub = 0x0896e924
+lib = "SysMemUserForUser"
+nid = 0x9d9a5ba1
+
+[[import]]
+stub = 0x0896e92c
+lib = "SysMemUserForUser"
+nid = 0xb6d61d02
+
+[[import]]
+stub = 0x0896e934
+lib = "ThreadManForUser"
+nid = 0xceadeb47
+
+[[import]]
+stub = 0x0896e93c
+lib = "ThreadManForUser"
+nid = 0xd6da4ba1
+
+[[import]]
+stub = 0x0896e944
+lib = "ThreadManForUser"
+nid = 0x1fb15a32
+
+[[import]]
+stub = 0x0896e94c
+lib = "ThreadManForUser"
+nid = 0xe81caf8f
+
+[[import]]
+stub = 0x0896e954
+lib = "ThreadManForUser"
+nid = 0xea748e31
+
+[[import]]
+stub = 0x0896e95c
+lib = "ThreadManForUser"
+nid = 0xedba5844
+
+[[import]]
+stub = 0x0896e964
+lib = "ThreadManForUser"
+nid = 0xef9e4c70
+
+[[import]]
+stub = 0x0896e96c
+lib = "ThreadManForUser"
+nid = 0xf475845d
+
+[[import]]
+stub = 0x0896e974
+lib = "ThreadManForUser"
+nid = 0xf8170fbe
+
+[[import]]
+stub = 0x0896e97c
+lib = "ThreadManForUser"
+nid = 0x278c0df5
+
+[[import]]
+stub = 0x0896e984
+lib = "ThreadManForUser"
+nid = 0x28b6489c
+
+[[import]]
+stub = 0x0896e98c
+lib = "ThreadManForUser"
+nid = 0x328c546a
+
+[[import]]
+stub = 0x0896e994
+lib = "ThreadManForUser"
+nid = 0x349d6d6c
+
+[[import]]
+stub = 0x0896e99c
+lib = "ThreadManForUser"
+nid = 0x369ed59d
+
+[[import]]
+stub = 0x0896e9a4
+lib = "ThreadManForUser"
+nid = 0x3f53e640
+
+[[import]]
+stub = 0x0896e9ac
+lib = "ThreadManForUser"
+nid = 0x402fcf22
+
+[[import]]
+stub = 0x0896e9b4
+lib = "ThreadManForUser"
+nid = 0x446d8de6
+
+[[import]]
+stub = 0x0896e9bc
+lib = "ThreadManForUser"
+nid = 0x4e3a1105
+
+[[import]]
+stub = 0x0896e9c4
+lib = "ThreadManForUser"
+nid = 0x55c20a00
+
+[[import]]
+stub = 0x0896e9cc
+lib = "ThreadManForUser"
+nid = 0x58b1f937
+
+[[import]]
+stub = 0x0896e9d4
+lib = "ThreadManForUser"
+nid = 0x60107536
+
+[[import]]
+stub = 0x0896e9dc
+lib = "ThreadManForUser"
+nid = 0x616403ba
+
+[[import]]
+stub = 0x0896e9e4
+lib = "ThreadManForUser"
+nid = 0x68da9e36
+
+[[import]]
+stub = 0x0896e9ec
+lib = "ThreadManForUser"
+nid = 0x6b30100f
+
+[[import]]
+stub = 0x0896e9f4
+lib = "ThreadManForUser"
+nid = 0x6d212bac
+
+[[import]]
+stub = 0x0896e9fc
+lib = "ThreadManForUser"
+nid = 0x71bc9871
+
+[[import]]
+stub = 0x0896ea04
+lib = "ThreadManForUser"
+nid = 0x809ce29b
+
+[[import]]
+stub = 0x0896ea0c
+lib = "ThreadManForUser"
+nid = 0x812346e4
+
+[[import]]
+stub = 0x0896ea14
+lib = "ThreadManForUser"
+nid = 0x82bc5777
+
+[[import]]
+stub = 0x0896ea1c
+lib = "ThreadManForUser"
+nid = 0x17c1684e
+
+[[import]]
+stub = 0x0896ea24
+lib = "ThreadManForUser"
+nid = 0x840e8133
+
+[[import]]
+stub = 0x0896ea2c
+lib = "ThreadManForUser"
+nid = 0x9fa03cd3
+
+[[import]]
+stub = 0x0896ea34
+lib = "ThreadManForUser"
+nid = 0xaa73c935
+
+[[import]]
+stub = 0x0896ea3c
+lib = "ThreadManForUser"
+nid = 0x19cff145
+
+[[import]]
+stub = 0x0896ea44
+lib = "ThreadManForUser"
+nid = 0xb011b11f
+
+[[import]]
+stub = 0x0896ea4c
+lib = "ThreadManForUser"
+nid = 0xb7d098c6
+
+[[import]]
+stub = 0x0896ea54
+lib = "ThreadManForUser"
+nid = 0xc07bb470
+
+[[import]]
+stub = 0x0896ea5c
+lib = "ThreadManForUser"
+nid = 0xed1410e0
+
+[[import]]
+stub = 0x0896ea64
+lib = "ThreadManForUser"
+nid = 0x623ae665
+
+[[import]]
+stub = 0x0896ea6c
+lib = "UtilsForUser"
+nid = 0x6ad345d7
+
+[[import]]
+stub = 0x0896ea74
+lib = "UtilsForUser"
+nid = 0x79d1c3fa
+
+[[import]]
+stub = 0x0896ea7c
+lib = "UtilsForUser"
+nid = 0x37fb5c42
+
+[[import]]
+stub = 0x0896ea84
+lib = "UtilsForUser"
+nid = 0x71ec4271
+
+[[import]]
+stub = 0x0896ea8c
+lib = "UtilsForUser"
+nid = 0x91e4f6a7
+
+[[import]]
+stub = 0x0896ea94
+lib = "UtilsForUser"
+nid = 0x27cc57f0
+
+[[import]]
+stub = 0x0896ea9c
+lib = "sceAtrac3plus"
+nid = 0x5d268707
+
+[[import]]
+stub = 0x0896eaa4
+lib = "sceAtrac3plus"
+nid = 0x61eb33f5
+
+[[import]]
+stub = 0x0896eaac
+lib = "sceAtrac3plus"
+nid = 0x6a8c3cd5
+
+[[import]]
+stub = 0x0896eab4
+lib = "sceAtrac3plus"
+nid = 0x7a20e7af
+
+[[import]]
+stub = 0x0896eabc
+lib = "sceAtrac3plus"
+nid = 0x7db31251
+
+[[import]]
+stub = 0x0896eac4
+lib = "sceAtrac3plus"
+nid = 0x83bf7afd
+
+[[import]]
+stub = 0x0896eacc
+lib = "sceAtrac3plus"
+nid = 0x83e85ea0
+
+[[import]]
+stub = 0x0896ead4
+lib = "sceAtrac3plus"
+nid = 0x868120b5
+
+[[import]]
+stub = 0x0896eadc
+lib = "sceAtrac3plus"
+nid = 0x9ae849a7
+
+[[import]]
+stub = 0x0896eae4
+lib = "sceAtrac3plus"
+nid = 0xe88f759b
+
+[[import]]
+stub = 0x0896eaec
+lib = "sceAtrac3plus"
+nid = 0xeca32a99
+
+[[import]]
+stub = 0x0896eaf4
+lib = "sceAtrac3plus"
+nid = 0xfaa4f89b
+
+[[import]]
+stub = 0x0896eafc
+lib = "sceAudio"
+nid = 0x136caf51
+
+[[import]]
+stub = 0x0896eb04
+lib = "sceAudio"
+nid = 0x13f592bc
+
+[[import]]
+stub = 0x0896eb0c
+lib = "sceAudio"
+nid = 0x5ec81c55
+
+[[import]]
+stub = 0x0896eb14
+lib = "sceAudio"
+nid = 0x6fc46853
+
+[[import]]
+stub = 0x0896eb1c
+lib = "sceAudio"
+nid = 0x95fd0c2d
+
+[[import]]
+stub = 0x0896eb24
+lib = "sceAudio"
+nid = 0xb011922f
+
+[[import]]
+stub = 0x0896eb2c
+lib = "sceAudio"
+nid = 0xb7e1d8e7
+
+[[import]]
+stub = 0x0896eb34
+lib = "sceAudio"
+nid = 0xcb2e439e
+
+[[import]]
+stub = 0x0896eb3c
+lib = "sceAudio"
+nid = 0xe2d56b2d
+
+[[import]]
+stub = 0x0896eb44
+lib = "sceCtrl"
+nid = 0x1f4011e6
+
+[[import]]
+stub = 0x0896eb4c
+lib = "sceCtrl"
+nid = 0x1f803938
+
+[[import]]
+stub = 0x0896eb54
+lib = "sceCtrl"
+nid = 0x6a2774f3
+
+[[import]]
+stub = 0x0896eb5c
+lib = "sceDisplay"
+nid = 0x0e20f177
+
+[[import]]
+stub = 0x0896eb64
+lib = "sceDisplay"
+nid = 0x289d82fe
+
+[[import]]
+stub = 0x0896eb6c
+lib = "sceDisplay"
+nid = 0x46f186c3
+
+[[import]]
+stub = 0x0896eb74
+lib = "sceDisplay"
+nid = 0x984c27e7
+
+[[import]]
+stub = 0x0896eb7c
+lib = "sceDisplay"
+nid = 0x9c6eaad7
+
+[[import]]
+stub = 0x0896eb84
+lib = "sceDisplay"
+nid = 0xdba6c4c4
+
+[[import]]
+stub = 0x0896eb8c
+lib = "sceDmac"
+nid = 0x617f3fe6
+
+[[import]]
+stub = 0x0896eb94
+lib = "sceGe_user"
+nid = 0x03444eb4
+
+[[import]]
+stub = 0x0896eb9c
+lib = "sceGe_user"
+nid = 0x05db22ce
+
+[[import]]
+stub = 0x0896eba4
+lib = "sceGe_user"
+nid = 0x1c0d95a6
+
+[[import]]
+stub = 0x0896ebac
+lib = "sceGe_user"
+nid = 0x1f6752ad
+
+[[import]]
+stub = 0x0896ebb4
+lib = "sceGe_user"
+nid = 0x4c06e472
+
+[[import]]
+stub = 0x0896ebbc
+lib = "sceGe_user"
+nid = 0xa4fc06a4
+
+[[import]]
+stub = 0x0896ebc4
+lib = "sceGe_user"
+nid = 0xab49e76a
+
+[[import]]
+stub = 0x0896ebcc
+lib = "sceGe_user"
+nid = 0xb287bd61
+
+[[import]]
+stub = 0x0896ebd4
+lib = "sceGe_user"
+nid = 0xb448ec0d
+
+[[import]]
+stub = 0x0896ebdc
+lib = "sceGe_user"
+nid = 0xe0d68148
+
+[[import]]
+stub = 0x0896ebe4
+lib = "sceGe_user"
+nid = 0xe47e40e4
+
+[[import]]
+stub = 0x0896ebec
+lib = "sceImpose"
+nid = 0x36aa6e91
+
+[[import]]
+stub = 0x0896ebf4
+lib = "sceMpeg"
+nid = 0x0e3c2e9d
+
+[[import]]
+stub = 0x0896ebfc
+lib = "sceMpeg"
+nid = 0x13407f13
+
+[[import]]
+stub = 0x0896ec04
+lib = "sceMpeg"
+nid = 0x167afd9e
+
+[[import]]
+stub = 0x0896ec0c
+lib = "sceMpeg"
+nid = 0x21ff80e4
+
+[[import]]
+stub = 0x0896ec14
+lib = "sceMpeg"
+nid = 0x37295ed8
+
+[[import]]
+stub = 0x0896ec1c
+lib = "sceMpeg"
+nid = 0x42560f23
+
+[[import]]
+stub = 0x0896ec24
+lib = "sceMpeg"
+nid = 0x4571cc64
+
+[[import]]
+stub = 0x0896ec2c
+lib = "sceMpeg"
+nid = 0x591a4aa2
+
+[[import]]
+stub = 0x0896ec34
+lib = "sceMpeg"
+nid = 0x606a4649
+
+[[import]]
+stub = 0x0896ec3c
+lib = "sceMpeg"
+nid = 0x611e9e11
+
+[[import]]
+stub = 0x0896ec44
+lib = "sceMpeg"
+nid = 0x682a619b
+
+[[import]]
+stub = 0x0896ec4c
+lib = "sceMpeg"
+nid = 0x707b7629
+
+[[import]]
+stub = 0x0896ec54
+lib = "sceMpeg"
+nid = 0x740fccd1
+
+[[import]]
+stub = 0x0896ec5c
+lib = "sceMpeg"
+nid = 0x800c44df
+
+[[import]]
+stub = 0x0896ec64
+lib = "sceMpeg"
+nid = 0x874624d6
+
+[[import]]
+stub = 0x0896ec6c
+lib = "sceMpeg"
+nid = 0xa780cf7e
+
+[[import]]
+stub = 0x0896ec74
+lib = "sceMpeg"
+nid = 0xb240a59e
+
+[[import]]
+stub = 0x0896ec7c
+lib = "sceMpeg"
+nid = 0xb5f6dc87
+
+[[import]]
+stub = 0x0896ec84
+lib = "sceMpeg"
+nid = 0xc132e22f
+
+[[import]]
+stub = 0x0896ec8c
+lib = "sceMpeg"
+nid = 0xceb870b1
+
+[[import]]
+stub = 0x0896ec94
+lib = "sceMpeg"
+nid = 0xd7a29f46
+
+[[import]]
+stub = 0x0896ec9c
+lib = "sceMpeg"
+nid = 0xd8c5f121
+
+[[import]]
+stub = 0x0896eca4
+lib = "sceMpeg"
+nid = 0xe1ce83a7
+
+[[import]]
+stub = 0x0896ecac
+lib = "sceMpeg"
+nid = 0xf8dcb679
+
+[[import]]
+stub = 0x0896ecb4
+lib = "sceMpeg"
+nid = 0xfe246728
+
+[[import]]
+stub = 0x0896ecbc
+lib = "sceNet"
+nid = 0x0bf0a3ae
+
+[[import]]
+stub = 0x0896ecc4
+lib = "sceNet"
+nid = 0x281928a9
+
+[[import]]
+stub = 0x0896eccc
+lib = "sceNet"
+nid = 0x39af39a6
+
+[[import]]
+stub = 0x0896ecd4
+lib = "sceNet"
+nid = 0x89360950
+
+[[import]]
+stub = 0x0896ecdc
+lib = "sceNet"
+nid = 0xcc393e48
+
+[[import]]
+stub = 0x0896ece4
+lib = "sceNetAdhoc"
+nid = 0x157e6225
+
+[[import]]
+stub = 0x0896ecec
+lib = "sceNetAdhoc"
+nid = 0x4da4c788
+
+[[import]]
+stub = 0x0896ecf4
+lib = "sceNetAdhoc"
+nid = 0x6f92741b
+
+[[import]]
+stub = 0x0896ecfc
+lib = "sceNetAdhoc"
+nid = 0x7f27bb5e
+
+[[import]]
+stub = 0x0896ed04
+lib = "sceNetAdhoc"
+nid = 0x877f6d66
+
+[[import]]
+stub = 0x0896ed0c
+lib = "sceNetAdhoc"
+nid = 0x8bea2b3e
+
+[[import]]
+stub = 0x0896ed14
+lib = "sceNetAdhoc"
+nid = 0x9ac2eeac
+
+[[import]]
+stub = 0x0896ed1c
+lib = "sceNetAdhoc"
+nid = 0x9df81198
+
+[[import]]
+stub = 0x0896ed24
+lib = "sceNetAdhoc"
+nid = 0xa62c6f57
+
+[[import]]
+stub = 0x0896ed2c
+lib = "sceNetAdhoc"
+nid = 0xabed3790
+
+[[import]]
+stub = 0x0896ed34
+lib = "sceNetAdhoc"
+nid = 0xdfe53e03
+
+[[import]]
+stub = 0x0896ed3c
+lib = "sceNetAdhoc"
+nid = 0xe08bdac1
+
+[[import]]
+stub = 0x0896ed44
+lib = "sceNetAdhoc"
+nid = 0xe1d621d7
+
+[[import]]
+stub = 0x0896ed4c
+lib = "sceNetAdhoc"
+nid = 0xfc6fc07b
+
+[[import]]
+stub = 0x0896ed54
+lib = "sceNetAdhocMatching"
+nid = 0x2a2a1e07
+
+[[import]]
+stub = 0x0896ed5c
+lib = "sceNetAdhocMatching"
+nid = 0x32b156b3
+
+[[import]]
+stub = 0x0896ed64
+lib = "sceNetAdhocMatching"
+nid = 0x5e3d4b79
+
+[[import]]
+stub = 0x0896ed6c
+lib = "sceNetAdhocMatching"
+nid = 0x7945ecda
+
+[[import]]
+stub = 0x0896ed74
+lib = "sceNetAdhocMatching"
+nid = 0x93ef3843
+
+[[import]]
+stub = 0x0896ed7c
+lib = "sceNetAdhocMatching"
+nid = 0x9c5cfb7d
+
+[[import]]
+stub = 0x0896ed84
+lib = "sceNetAdhocMatching"
+nid = 0xb58e61b7
+
+[[import]]
+stub = 0x0896ed8c
+lib = "sceNetAdhocMatching"
+nid = 0xc58bcd9e
+
+[[import]]
+stub = 0x0896ed94
+lib = "sceNetAdhocMatching"
+nid = 0xca5eda6f
+
+[[import]]
+stub = 0x0896ed9c
+lib = "sceNetAdhocMatching"
+nid = 0xea3c6108
+
+[[import]]
+stub = 0x0896eda4
+lib = "sceNetAdhocMatching"
+nid = 0xf16eaf4f
+
+[[import]]
+stub = 0x0896edac
+lib = "sceNetAdhocMatching"
+nid = 0xf79472d7
+
+[[import]]
+stub = 0x0896edb4
+lib = "sceNetAdhocctl"
+nid = 0x08fff7a0
+
+[[import]]
+stub = 0x0896edbc
+lib = "sceNetAdhocctl"
+nid = 0x0ad043ed
+
+[[import]]
+stub = 0x0896edc4
+lib = "sceNetAdhocctl"
+nid = 0x20b317a0
+
+[[import]]
+stub = 0x0896edcc
+lib = "sceNetAdhocctl"
+nid = 0x34401d65
+
+[[import]]
+stub = 0x0896edd4
+lib = "sceNetAdhocctl"
+nid = 0x6402490b
+
+[[import]]
+stub = 0x0896eddc
+lib = "sceNetAdhocctl"
+nid = 0x9d689e13
+
+[[import]]
+stub = 0x0896ede4
+lib = "sceNetAdhocctl"
+nid = 0xe162cb14
+
+[[import]]
+stub = 0x0896edec
+lib = "sceNetAdhocctl"
+nid = 0xe26f226e
+
+[[import]]
+stub = 0x0896edf4
+lib = "sceNetAdhocctl"
+nid = 0xec0635c1
+
+[[import]]
+stub = 0x0896edfc
+lib = "scePower"
+nid = 0x04b7766e
+
+[[import]]
+stub = 0x0896ee04
+lib = "scePower"
+nid = 0x469989ad
+
+[[import]]
+stub = 0x0896ee0c
+lib = "scePower"
+nid = 0xa85880d0
+
+[[import]]
+stub = 0x0896ee14
+lib = "sceRtc"
+nid = 0x3f7ad767
+
+[[import]]
+stub = 0x0896ee1c
+lib = "sceRtc"
+nid = 0x44f45e05
+
+[[import]]
+stub = 0x0896ee24
+lib = "sceRtc"
+nid = 0x6ff40acc
+
+[[import]]
+stub = 0x0896ee2c
+lib = "sceRtc"
+nid = 0x7ed29e40
+
+[[import]]
+stub = 0x0896ee34
+lib = "sceSasCore"
+nid = 0x019b25eb
+
+[[import]]
+stub = 0x0896ee3c
+lib = "sceSasCore"
+nid = 0x07f58c24
+
+[[import]]
+stub = 0x0896ee44
+lib = "sceSasCore"
+nid = 0x267a6dd2
+
+[[import]]
+stub = 0x0896ee4c
+lib = "sceSasCore"
+nid = 0x2c8e6ab3
+
+[[import]]
+stub = 0x0896ee54
+lib = "sceSasCore"
+nid = 0x33d4ab37
+
+[[import]]
+stub = 0x0896ee5c
+lib = "sceSasCore"
+nid = 0x42778a9f
+
+[[import]]
+stub = 0x0896ee64
+lib = "sceSasCore"
+nid = 0x440ca7d8
+
+[[import]]
+stub = 0x0896ee6c
+lib = "sceSasCore"
+nid = 0x50a14dfc
+
+[[import]]
+stub = 0x0896ee74
+lib = "sceSasCore"
+nid = 0x5f9529f6
+
+[[import]]
+stub = 0x0896ee7c
+lib = "sceSasCore"
+nid = 0x68a46b95
+
+[[import]]
+stub = 0x0896ee84
+lib = "sceSasCore"
+nid = 0x74ae582a
+
+[[import]]
+stub = 0x0896ee8c
+lib = "sceSasCore"
+nid = 0x76f01aca
+
+[[import]]
+stub = 0x0896ee94
+lib = "sceSasCore"
+nid = 0x787d04d5
+
+[[import]]
+stub = 0x0896ee9c
+lib = "sceSasCore"
+nid = 0x99944089
+
+[[import]]
+stub = 0x0896eea4
+lib = "sceSasCore"
+nid = 0x9ec3676a
+
+[[import]]
+stub = 0x0896eeac
+lib = "sceSasCore"
+nid = 0xa0cf2fa4
+
+[[import]]
+stub = 0x0896eeb4
+lib = "sceSasCore"
+nid = 0xa3589d81
+
+[[import]]
+stub = 0x0896eebc
+lib = "sceSasCore"
+nid = 0xad84d37f
+
+[[import]]
+stub = 0x0896eec4
+lib = "sceSasCore"
+nid = 0xb7660a23
+
+[[import]]
+stub = 0x0896eecc
+lib = "sceSasCore"
+nid = 0xbd11b7c2
+
+[[import]]
+stub = 0x0896eed4
+lib = "sceSasCore"
+nid = 0xcbcd4f79
+
+[[import]]
+stub = 0x0896eedc
+lib = "sceSasCore"
+nid = 0xd1e0a01e
+
+[[import]]
+stub = 0x0896eee4
+lib = "sceSasCore"
+nid = 0xd5a229c9
+
+[[import]]
+stub = 0x0896eeec
+lib = "sceSasCore"
+nid = 0xe175ef66
+
+[[import]]
+stub = 0x0896eef4
+lib = "sceSasCore"
+nid = 0xe1cd9561
+
+[[import]]
+stub = 0x0896eefc
+lib = "sceSasCore"
+nid = 0xe855bf76
+
+[[import]]
+stub = 0x0896ef04
+lib = "sceSasCore"
+nid = 0xf983b186
+
+[[import]]
+stub = 0x0896ef0c
+lib = "sceSuspendForUser"
+nid = 0x090ccb3f
+
+[[import]]
+stub = 0x0896ef14
+lib = "sceUmdUser"
+nid = 0x20628e6f
+
+[[import]]
+stub = 0x0896ef1c
+lib = "sceUmdUser"
+nid = 0x46ebb729
+
+[[import]]
+stub = 0x0896ef24
+lib = "sceUmdUser"
+nid = 0x4a9e5e29
+
+[[import]]
+stub = 0x0896ef2c
+lib = "sceUmdUser"
+nid = 0x56202973
+
+[[import]]
+stub = 0x0896ef34
+lib = "sceUmdUser"
+nid = 0x6af9b50a
+
+[[import]]
+stub = 0x0896ef3c
+lib = "sceUmdUser"
+nid = 0x6b4a146c
+
+[[import]]
+stub = 0x0896ef44
+lib = "sceUmdUser"
+nid = 0x8ef08fce
+
+[[import]]
+stub = 0x0896ef4c
+lib = "sceUmdUser"
+nid = 0xaee7404d
+
+[[import]]
+stub = 0x0896ef54
+lib = "sceUmdUser"
+nid = 0xbd2bde07
+
+[[import]]
+stub = 0x0896ef5c
+lib = "sceUmdUser"
+nid = 0xc6183d47
+
+[[import]]
+stub = 0x0896ef64
+lib = "sceUtility"
+nid = 0x0251b134
+
+[[import]]
+stub = 0x0896ef6c
+lib = "sceUtility"
+nid = 0x24ac31eb
+
+[[import]]
+stub = 0x0896ef74
+lib = "sceUtility"
+nid = 0x2a2b3de0
+
+[[import]]
+stub = 0x0896ef7c
+lib = "sceUtility"
+nid = 0x2ad8e239
+
+[[import]]
+stub = 0x0896ef84
+lib = "sceUtility"
+nid = 0x32e32dcb
+
+[[import]]
+stub = 0x0896ef8c
+lib = "sceUtility"
+nid = 0x34b78343
+
+[[import]]
+stub = 0x0896ef94
+lib = "sceUtility"
+nid = 0x4928bd96
+
+[[import]]
+stub = 0x0896ef9c
+lib = "sceUtility"
+nid = 0x4aecd179
+
+[[import]]
+stub = 0x0896efa4
+lib = "sceUtility"
+nid = 0x4db1e739
+
+[[import]]
+stub = 0x0896efac
+lib = "sceUtility"
+nid = 0x50c4cd57
+
+[[import]]
+stub = 0x0896efb4
+lib = "sceUtility"
+nid = 0x6332aa39
+
+[[import]]
+stub = 0x0896efbc
+lib = "sceUtility"
+nid = 0x67af3428
+
+[[import]]
+stub = 0x0896efc4
+lib = "sceUtility"
+nid = 0x8874dbe0
+
+[[import]]
+stub = 0x0896efcc
+lib = "sceUtility"
+nid = 0x91e70e35
+
+[[import]]
+stub = 0x0896efd4
+lib = "sceUtility"
+nid = 0x95fc253b
+
+[[import]]
+stub = 0x0896efdc
+lib = "sceUtility"
+nid = 0x9790b33c
+
+[[import]]
+stub = 0x0896efe4
+lib = "sceUtility"
+nid = 0x9a1c91d7
+
+[[import]]
+stub = 0x0896efec
+lib = "sceUtility"
+nid = 0xab083ea9
+
+[[import]]
+stub = 0x0896eff4
+lib = "sceUtility"
+nid = 0xb57e95d9
+
+[[import]]
+stub = 0x0896effc
+lib = "sceUtility"
+nid = 0xd4b95ffb
+
+[[import]]
+stub = 0x0896f004
+lib = "sceUtility"
+nid = 0xd81957b7
+
+[[import]]
+stub = 0x0896f00c
+lib = "sceUtility"
+nid = 0xe49bfe92
+
+[[import]]
+stub = 0x0896f014
+lib = "sceUtility"
+nid = 0xf88155f6
+
+[[import]]
+stub = 0x0896f01c
+lib = "sceUtility"
+nid = 0xf9e0008c
