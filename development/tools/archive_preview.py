@@ -42,8 +42,17 @@ def main():
         data = (ROOT / name).read_bytes()
         assert sha(data) == expected, name
         entries[name] = data
-    for name in ["README.md", "CONTINUE.md", "development/DEVELOPMENT.md"]:
-        entries[name] = (ROOT / name).read_bytes()
+    for name in ["README.md", "LICENSE", "COPYRIGHT.md", "AI_DISCLOSURE.md",
+                 "docs/DEVELOPMENT.md", "docs/VALIDATION.md", "docs/CONTINUE.md", "docs/DEPENDENCIES.md",
+                 "CONTINUE.md", "development/DEVELOPMENT.md"]:
+        if (ROOT / name).is_file():
+            entries[name] = (ROOT / name).read_bytes()
+    if manifest['build'].get('game_input', {}).get('mode') == 'prepared-c':
+        from prepared_game import verify
+        prepared = verify()
+        for name in [*prepared['files'], 'manifest.json']:
+            relative = 'development/prepared/game/' + name
+            entries[relative] = (ROOT / relative).read_bytes()
     for path in (ROOT / "development/tools").glob("*.py"):
         entries[path.relative_to(ROOT).as_posix()] = path.read_bytes()
     for path in (ROOT / "development/evidence").glob("*test.json"):
@@ -51,6 +60,7 @@ def main():
             entries[path.relative_to(ROOT).as_posix()] = path.read_bytes()
     inventory = {name: {"sha256": sha(data), "bytes": len(data)} for name, data in entries.items()}
     archive = ROOT / "archive" / (datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ") + f"-preview-{version}.zip")
+    archive.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(archive, "x", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as z:
         for name, data in entries.items():
             z.writestr(name, data)

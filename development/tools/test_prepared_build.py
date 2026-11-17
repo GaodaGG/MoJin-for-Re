@@ -35,6 +35,7 @@ def main():
     for folder in ('tools','runtime','assets','prepared/game'):
         sources += [p for p in (DEV/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
     sources += [DEV/'mojin.mk',DEV/'inputs/dispatch-seeds.txt',DEV/'tests/vs-cpu-entry.pad']
+    sources += [ROOT/name for name in ('LICENSE','COPYRIGHT.md','AI_DISCLOSURE.md')]
     snapshot={}
     for source in sources:
         relative=source.relative_to(ROOT); target=dest/relative

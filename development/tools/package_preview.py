@@ -66,6 +66,8 @@ def main():
         assert sha(target) == entry['sha256'] and os.path.samefile(source, target)
         origins[relative] = source.relative_to(ROOT).as_posix()
     copy(MANIFEST, 'data/disc-manifest.json')
+    for name in ('LICENSE', 'COPYRIGHT.md', 'AI_DISCLOSURE.md'):
+        copy(ROOT / name, Path('PROJECT_NOTICES') / name)
     for source_root, output in [(BIN / "font", "font"),
             (DEV / "third_party/nakagawa/assets/vfpu", "data/vfpu"),
             (DEV / "third_party/nakagawa/assets/fonts/ui", "assets/fonts/ui"),
@@ -135,10 +137,11 @@ WindowWidth/WindowHeight 可用 1280/720、1920/1080、2560/1440、3840/2160。
 这是开发候选，不代表全游戏验收。部分系统提示仍自动选择默认项；
 初始存档跨进程读回已验证；剧情进度、未知静态代码路径、其他场景/角色/影片仍需继续验证。
 
-开发入口（开发项目中）：development/tools/build.py；继续记录：CONTINUE.md。
+开发入口（开发项目中）：development/tools/build.py；继续记录：docs/CONTINUE.md。
 原始 ISO 仅在开发侧重建/重新提取资源时需要，不属于运行依赖。
 原作/资源版本：ULJS00329，APP_VER 01.00，DISC_VERSION 1.02，仅此 ISO 版本。
 源码和许可证在项目 development 中；第三方声明随包保留。
+项目许可范围、原作归属和大量 AI 参与说明见 PROJECT_NOTICES。
 恢复：保留 saves、settings.ini、userdata、logs 后，从已校验归档恢复运行文件。
 具体文件摘要及来源见 release-manifest.json。不要按目录名直接清理缓存或存档。
 """, encoding="utf-8")
