@@ -85,9 +85,13 @@ def main():
     parser.add_argument("--window-size", choices=["960x544", "1280x720", "1920x1080", "2560x1440", "3840x2160"], default="960x544", help="Requested window output; independent of scene resolution")
     parser.add_argument("--perf", action="store_true", help="Write per-new-frame cadence and CPU/GPU/storage/synchronization telemetry")
     parser.add_argument("--profile", action="store_true", help="Bounded guest-PC/function and runtime-phase attribution; diagnostic overhead, not an acceptance benchmark")
+    parser.add_argument("--ge-profile", action="store_true", help="Read-only graphics phase snapshots at v7600..8800; diagnostic overhead, requires loop trace")
+    parser.add_argument("--readback-full", action="store_true", help="Diagnostic full-image GPU readback reference; preserves the same guest samples")
     parser.add_argument("--loop-trace", action="store_true", help="Observe pinned main-loop phases without changing game timing; bounded diagnostic CSV")
     parser.add_argument("--experimental-update-rate", type=int, choices=[90,120], help="DEVELOPMENT ONLY: bounded common-frame wait experiment at v7400:9000; requires loop trace and training-entry.pad")
     parser.add_argument('--experimental-input-peek', action='store_true', help='DEVELOPMENT ONLY: pair bounded update-rate experiment with a single nonblocking controller-read callsite')
+    parser.add_argument('--experimental-step-carry', action='store_true', help='DEVELOPMENT ONLY: preserve fractional time-step remainder in the two static arithmetic sites; requires update rate and input Peek')
+    parser.add_argument('--game-fps', type=int, choices=[60,120], default=60, help='Persisted battle FPS choice; normal PSP clocks outside the qualified battle scene')
     parser.add_argument("--media-poll-trace", action="store_true", help="Count MPEG imports per vblank, bounded to the first 4096 vblanks; diagnostic only")
     parser.add_argument("--pipeline-trace", action="store_true", help="Record exact native GPU pipeline keys and creation times in this private run")
     parser.add_argument("--prepare", choices=['on','off'], default='on', help="Move known pipeline creation before guest start")
@@ -104,6 +108,8 @@ def main():
         parser.error('--deny-iso requires --game-data')
     if args.experimental_input_peek and not args.experimental_update_rate:
         parser.error('--experimental-input-peek requires --experimental-update-rate')
+    if args.experimental_step_carry and not (args.experimental_update_rate and args.experimental_input_peek):
+        parser.error('--experimental-step-carry requires --experimental-update-rate and --experimental-input-peek')
     if args.script_handoff and not args.input_script:
         parser.error("--script-handoff requires --input-script")
     if args.settings_save:
@@ -221,15 +227,29 @@ def main():
                    SR_PERF_JSON=str(run / "perf.json"), SR_GPU_TIMESTAMPS="1")
     if args.profile:
         env.update(SR_PROFILE='1',SR_PCSAMPLE='1',SR_PERF='1')
+    if args.ge_profile:
+        if not args.loop_trace:
+            parser.error('--ge-profile requires --loop-trace')
+        env.update(SR_GPU_CPU_PROFILE='1',SR_GE_CPU_PROFILE='1',SR_GE_PRIM_PROFILE='1')
+    if args.readback_full:
+        env['SR_GPU_READBACK_FULL']='1'
     if args.loop_trace:
         env['SR_MOJIN_LOOP_TRACE'] = str(run / 'loop.csv')
+    if args.game_fps == 120:
+        if args.experimental_update_rate:
+            parser.error('Choose game-fps or the bounded experiment, not both')
+        env['SR_MOJIN_GAME_FPS'] = '120'
+        env['SR_FPS_CAP'] = '120'
     if args.experimental_update_rate:
-        if not args.loop_trace or not args.input_script or args.input_script.resolve() != (DEV / 'tests/training-entry.pad').resolve():
-            parser.error('The update-rate experiment requires --loop-trace and the inspected training-entry.pad route')
+        routes = {(DEV / 'tests' / name).resolve() for name in ('training-entry.pad', 'training-motion.pad')}
+        if not args.loop_trace or not args.input_script or args.input_script.resolve() not in routes:
+            parser.error('The update-rate experiment requires --loop-trace and an inspected training route')
         env['SR_MOJIN_EXPERIMENTAL_UPDATE_RATE'] = str(args.experimental_update_rate)
         env['SR_FPS_CAP'] = str(args.experimental_update_rate)
         if args.experimental_input_peek:
             env['SR_MOJIN_EXPERIMENTAL_INPUT_PEEK'] = '1'
+        if args.experimental_step_carry:
+            env['SR_MOJIN_EXPERIMENTAL_STEP_CARRY'] = '1'
     if args.media_poll_trace:
         env['SR_MOJIN_MEDIA_POLL_TRACE']=str(run/'media-polls.csv')
     if args.pipeline_trace:

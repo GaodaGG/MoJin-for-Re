@@ -10,6 +10,7 @@ from PIL import Image
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser()
 parser.add_argument('run',type=Path)
+parser.add_argument('--allow-resized-output',action='store_true',help='Record an explicitly resized visible window; still require original render targets and actual capture dimensions')
 args=parser.parse_args()
 run=args.run.resolve()
 if not run.is_relative_to(ROOT/'development/tests/runs'):
@@ -50,9 +51,17 @@ if mode=='save':
     original=dict(RenderScale=4,SSAA=2,WindowWidth=960,WindowHeight=544,Fullscreen=0)
     assert settings(run/'settings.ini')==expected
     assert settings(run/'settings.ini.previous')==original
+    if 'fps=' in log:
+        saved=configparser.ConfigParser(); saved.read(run/'settings.ini',encoding='utf-8-sig')
+        assert saved.getint('Graphics','FPS')==120
+        expected['FPS']=120
     assert 'MOJIN_SETTINGS saved scale=3 ssaa=1 window=1280x720 fullscreen=0' in log
     assert log.index('SR_PAUSE: resumed')<log.index('MOJIN_SETTINGS_PROBE sent=quit')
-    assert (sw,sh,cw,ch,ow,oh,aa)==(3840,2176,1920,1088,960,544,2)
+    assert (sw,sh,cw,ch,aa)==(3840,2176,1920,1088,2)
+    assert 'sdl3vk: init ok (960x544 swapchain' in log
+    if not args.allow_resized_output:
+        assert (ow,oh)==(960,544)
+    result['output_resized_after_start']=(ow,oh)!=(960,544)
     result['saved_options']=expected
     result['settings_sha256']=hashlib.sha256((run/'settings.ini').read_bytes()).hexdigest()
     result['backup_matches_original']=True

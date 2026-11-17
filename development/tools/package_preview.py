@@ -103,9 +103,12 @@ def main():
             queue.append(target)
     (dest / "settings.ini").write_text(
         "; Restart the game after edits. Window output is independent of render resolution.\n"
-        "[Graphics]\nRenderScale=4\nSSAA=2\nWindowWidth=960\nWindowHeight=544\nFullscreen=0\n",
+        "[Graphics]\nRenderScale=4\nSSAA=2\nWindowWidth=960\nWindowHeight=544\nFullscreen=0\nFPS=60\n",
         encoding="ascii")
-    (dest / "使用说明.txt").write_text("""魔法禁书目录 Windows 静态重编译开发预览 v0.1.2-dev
+    (dest / "使用说明.txt").write_text("""魔法禁书目录 Windows 静态重编译开发预览 v0.1.3-dev
+
+当前开发已暂停：120 FPS 实战目标尚未完成。最新图形候选只有构建/组件/重放验证，
+未完成游戏实测，不应覆盖已验证的正式游玩版本。详见项目 docs/PAUSED_120FPS.md。
 
 双击 MoJin.exe。无需命令行、Python、编译器或模拟器。首次启动从原作开场进入。
 完整复制本运行目录即可独立运行，不需要 ISO、项目目录或开发工具；不能只移动 EXE。
@@ -128,8 +131,11 @@ Esc 中用上下选择、左右切换，保存后下次启动生效；当前和�
 SSAA=1（关）/2/4（每轴倍率）。4 倍 SSAA 未验收，设备限制可能使实际倍率降低。
 WindowWidth/WindowHeight 可用 1280/720、1920/1080、2560/1440、3840/2160。
 这是窗口请求，受桌面限制；只加大窗口不会提高场景分辨率。Fullscreen=1 为桌面全屏。
-上述画质设置需重启应用。4K 物理输出和 90/120 FPS 尚未完成验证。
-游戏时钟保持原作速度，不默认启用插帧、全局加速或高帧率实验。
+上述画质设置需重启应用。4K 物理输出尚未验证。
+120 FPS：Esc → 战斗帧率 → 120 FPS → 保存，然后重启。也可关闭后设 FPS=120。
+FPS=60 恢复原速。120 档提高战斗更新与真实画面频率，并保留分数时间步长；
+菜单、加载和影片仍使用原作时钟，没有插帧或全局加速。未覆盖所有角色和招式，保留实验标识。
+已测动作耗时差在原作一帧内，但重攻击位移仍短约 6.2%；不保证所有物理、特效和冷却完全一致。
 
 存档：saves/PSP/SAVEDATA；设置：settings.ini；有效优化缓存：userdata；诊断：logs。
 更新前保留这四项，以及 settings.ini.previous（上一份设置）。测试使用开发区独立存档。
@@ -148,7 +154,7 @@ WindowWidth/WindowHeight 可用 1280/720、1920/1080、2560/1440、3840/2160。
     files = {p.relative_to(dest).as_posix(): {"sha256": sha(p), "bytes": p.stat().st_size,
               "source": origins.get(p.relative_to(dest).as_posix(), "generated package text")}
              for p in sorted(dest.rglob("*")) if p.is_file()}
-    record = {"version": "0.1.2-dev", "kind": "native development preview, limited scene coverage",
+    record = {"version": "0.1.3-dev", "kind": "native development preview, limited scene coverage",
               "build": build, "files": files, "iso_external": False,
               "resource_backend": "loose files with compiled LBA index; no ISO reader",
               "resource_manifest_sha256": sha(MANIFEST),

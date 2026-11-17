@@ -91,6 +91,10 @@ static int mojin_standalone_prepare(int *argc, char ***argv) {
     unsigned aa = GetPrivateProfileIntW(L"Graphics", L"SSAA", 2, settings);
     unsigned width = GetPrivateProfileIntW(L"Graphics", L"WindowWidth", 960, settings);
     unsigned height = GetPrivateProfileIntW(L"Graphics", L"WindowHeight", 544, settings);
+    unsigned fps = GetPrivateProfileIntW(L"Graphics", L"FPS", 60, settings);
+    if (fps != 60 && fps != 120) return mojin_start_error(L"Invalid Graphics FPS: choose 60 or 120.");
+    snprintf(path, sizeof(path), "%u", fps); _putenv_s("SR_MOJIN_GAME_FPS", path);
+    _putenv_s("SR_FPS_CAP", fps == 120 ? "120" : "60");
     if (scale < 1 || scale > 8 || (aa != 1 && aa != 2 && aa != 4) ||
         width < 480 || width > 3840 || height < 272 || height > 2176)
         return mojin_start_error(L"Invalid Graphics settings. RenderScale=1..8, SSAA=1/2/4; window=480x272..3840x2176.");
@@ -105,10 +109,10 @@ static int mojin_standalone_prepare(int *argc, char ***argv) {
     char settings_utf8[32768];
     if (!WideCharToMultiByte(CP_UTF8,0,settings,-1,settings_utf8,sizeof(settings_utf8),NULL,NULL))
         return mojin_start_error(L"Cannot encode settings path.");
-    MojinGraphicsOptions graphics = {(int)scale,(int)aa,(int)width,(int)height,fs?1:0};
+    MojinGraphicsOptions graphics = {(int)scale,(int)aa,(int)width,(int)height,fs?1:0,(int)fps};
     mojin_graphics_configure(settings_utf8,&graphics);
-    fprintf(stderr, "MOJIN_STANDALONE version=0.1.2-dev pid=%lu render=%u ssaa=%u output_request=%ux%u\n",
-        (unsigned long)GetCurrentProcessId(), scale, aa, width, height);
+    fprintf(stderr, "MOJIN_STANDALONE version=0.1.3-dev pid=%lu render=%u ssaa=%u output_request=%ux%u fps=%u\n",
+        (unsigned long)GetCurrentProcessId(), scale, aa, width, height, fps);
     static char *args[] = {"MoJin.exe", "--image", "data/mojin_image.bin", "0x08804000", "0x08804114",
                           "data/module-abi-init.txt", "none", "--sched", "--gui", NULL};
     *argc = 9; *argv = args;

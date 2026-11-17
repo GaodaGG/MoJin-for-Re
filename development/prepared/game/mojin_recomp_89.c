@@ -2594,6 +2594,7 @@ void f_0891bf14(CpuState *s) {
     sr_begin(s, 0x0891c0bcu, 0x0e24e647u); s->r[31] = 0x0891c0c4u; sr_end(s, 0u, 0);
     sr_begin(s, 0x0891c0c0u, 0x00002812u); s->r[5] = s->lo; sr_end(s, 0u, 0);
     if (sr_aot_return_boundary_begin(s, 0x0891c0c4u, 0x0891c0bcu, 1u)) return; f_0893991c(s); SR_TAIL_DRAIN(s); if (sr_aot_return_boundary_end(s)) return;
+    { extern void mojin_experimental_step(CpuState *, uint32_t); mojin_experimental_step(s, 0x0891c0c4u); }
     sr_begin(s, 0x0891c0c4u, 0x28440081u); s->r[4] = ((int32_t)s->r[2] < (int32_t)0x00000081u ? 1u : 0u); sr_end(s, 0u, 0);
     { uint32_t _c = (s->r[4] != 0u);
       sr_begin(s, 0x0891c0c8u, 0x14800042u); sr_end(s, 0u, 0);
@@ -2670,6 +2671,7 @@ void f_0891bf14(CpuState *s) {
     sr_begin(s, 0x0891c1c0u, 0x0e24e647u); s->r[31] = 0x0891c1c8u; sr_end(s, 0u, 0);
     sr_begin(s, 0x0891c1c4u, 0x00002812u); s->r[5] = s->lo; sr_end(s, 0u, 0);
     if (sr_aot_return_boundary_begin(s, 0x0891c1c8u, 0x0891c1c0u, 1u)) return; f_0893991c(s); SR_TAIL_DRAIN(s); if (sr_aot_return_boundary_end(s)) return;
+    { extern void mojin_experimental_step(CpuState *, uint32_t); mojin_experimental_step(s, 0x0891c1c8u); }
     sr_begin(s, 0x0891c1c8u, 0x28440081u); s->r[4] = ((int32_t)s->r[2] < (int32_t)0x00000081u ? 1u : 0u); sr_end(s, 0u, 0);
     { uint32_t _c = (s->r[4] == 0u);
       sr_begin(s, 0x0891c1ccu, 0x1080ffc0u); sr_end(s, 0u, 0);

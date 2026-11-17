@@ -20,6 +20,9 @@ assert len(test['logs'])==1
 log=(ROOT/test['logs'][0]).read_text(encoding='utf-8',errors='replace')
 o=manifest['expected_options']; scale=o['RenderScale']; aa=o['SSAA']
 assert f"render={scale} ssaa={aa} output_request={o['WindowWidth']}x{o['WindowHeight']}" in log
+if 'FPS' in o:
+    assert f"fps={o['FPS']}" in log
+    assert 'MOJIN_FRAME_CLOCK target=120' in log
 assert f'MOJIN_RENDER composition={480*scale}x{272*scale}' in log
 assert 'BOOT_EVENT phase=first_frame source=gpu presented=1' in log
 assert 'Guest requested exit (sceKernelExitGame())' in log

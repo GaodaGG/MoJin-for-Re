@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 typedef struct {
-    int scale, ssaa, width, height, fullscreen;
+    int scale, ssaa, width, height, fullscreen, fps;
 } MojinGraphicsOptions;
 
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 } MojinGraphicsView;
 
 enum { MOJIN_GRAPHICS_SCALE, MOJIN_GRAPHICS_AA, MOJIN_GRAPHICS_WINDOW,
-       MOJIN_GRAPHICS_FULLSCREEN, MOJIN_GRAPHICS_FIELD_COUNT };
+       MOJIN_GRAPHICS_FULLSCREEN, MOJIN_GRAPHICS_FPS, MOJIN_GRAPHICS_FIELD_COUNT };
 #define MOJIN_GRAPHICS_ACTION_BASE 100
 #define MOJIN_GRAPHICS_ACTION_SAVE 110
 #define MOJIN_GRAPHICS_ACTION_RESET 111

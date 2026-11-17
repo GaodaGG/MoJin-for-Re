@@ -33,27 +33,26 @@ NkOverlayAction nk_overlay_page_settings(NkUi *ui,NkOverlayState *state,const Nk
     float inner=nk_overlay_page_begin(ui,model,880.0f);
     if(inner<=0) return result;
     nk_overlay_eyebrow(ui,QUICK_ID_EYEBROW,NULL,"游戏已暂停",theme->muted);
-    nk_ui_text_role(ui,QUICK_ID_TITLE,"画质设置",NK_UI_TYPE_TITLE,theme->paper);
+    nk_ui_text_role(ui,QUICK_ID_TITLE,"画面与帧率",NK_UI_TYPE_TITLE,theme->paper);
     char current[256],next[256];
     snprintf(current,sizeof(current),"当前场景目标 %d × %d   ·   合成 %d × %d   ·   窗口输出 %d × %d",
         v->scene_width,v->scene_height,v->composition_width,v->composition_height,v->output_width,v->output_height);
     NkUiTextStyle note=nk_ui_type(NK_UI_TYPE_FOOTNOTE,theme->muted); note.wrap=true;
     nk_ui_text(ui,MOJIN_Q_ID(0x200u),nk_ui_frame_text(ui,current),&note);
-    snprintf(next,sizeof(next),"下次请求场景目标 %d × %d；原始贴图、HUD 和影片不会因此增加细节。",
+    snprintf(next,sizeof(next),"下次场景 %d × %d；原始素材细节不变。",
         480*v->pending.scale*v->pending.ssaa,272*v->pending.scale*v->pending.ssaa);
-    nk_ui_text(ui,MOJIN_Q_ID(0x201u),nk_ui_frame_text(ui,next),&note);
     NkUiLayout rows=nk_overlay_layout(NK_UI_LAYOUT_COLUMN,nk_overlay_grow(),nk_overlay_fit(),2.0f);
     if(nk_ui_begin_container(ui,QUICK_ID_ROWS,&rows,NULL)) {
         mojin_choice_row(ui,MOJIN_GRAPHICS_SCALE,"合成分辨率","更高分辨率会增加显卡负担。",inner,&result);
-        mojin_choice_row(ui,MOJIN_GRAPHICS_AA,"抗锯齿","场景超采样后缩小到合成分辨率。",inner,&result);
+        mojin_choice_row(ui,MOJIN_GRAPHICS_AA,"抗锯齿",nk_ui_frame_text(ui,next),inner,&result);
         mojin_choice_row(ui,MOJIN_GRAPHICS_WINDOW,"窗口分辨率","受屏幕限制；放大窗口不提高场景细节。",inner,&result);
         mojin_choice_row(ui,MOJIN_GRAPHICS_FULLSCREEN,"显示模式","全屏使用桌面实际分辨率。",inner,&result);
+        mojin_choice_row(ui,MOJIN_GRAPHICS_FPS,"战斗帧率","未覆盖所有招式；影片原速。保存后重启。",inner,&result);
         nk_ui_end_container(ui);
     }
     note.rgba=v->dirty ? theme->warning : theme->muted;
     nk_ui_text(ui,MOJIN_Q_ID(0x202u),v->status,&note);
     note.rgba=theme->muted;
-    nk_ui_text(ui,QUICK_ID_FOOT,"当前保持原作速度；90 / 120 FPS 尚未验证，未启用。",&note);
     NkUiLayout actions=nk_overlay_layout(NK_UI_LAYOUT_ROW,nk_overlay_grow(),nk_overlay_fit(),12.0f);
     if(nk_ui_begin_container(ui,MOJIN_Q_ID(0x203u),&actions,NULL)) {
         if(nk_ui_button(ui,MOJIN_Q_ID(0x220u),"保存，下次启动生效",0u))

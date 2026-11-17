@@ -20,14 +20,14 @@ static const int sizes[][2] = {{960,544},{1280,720},{1920,1080},{2560,1440},{384
 
 static int equal(const MojinGraphicsOptions *a, const MojinGraphicsOptions *b) {
     return a->scale == b->scale && a->ssaa == b->ssaa && a->width == b->width &&
-           a->height == b->height && a->fullscreen == b->fullscreen;
+           a->height == b->height && a->fullscreen == b->fullscreen && a->fps == b->fps;
 }
 
 int mojin_graphics_valid(const MojinGraphicsOptions *o) {
     return o && o->scale >= 1 && o->scale <= 8 &&
         (o->ssaa == 1 || o->ssaa == 2 || o->ssaa == 4) &&
         o->width >= 480 && o->width <= 3840 && o->height >= 272 && o->height <= 2176 &&
-        (o->fullscreen == 0 || o->fullscreen == 1);
+        (o->fullscreen == 0 || o->fullscreen == 1) && (o->fps == 60 || o->fps == 120);
 }
 
 void mojin_graphics_configure(const char *path, const MojinGraphicsOptions *o) {
@@ -35,7 +35,7 @@ void mojin_graphics_configure(const char *path, const MojinGraphicsOptions *o) {
     settings_path[0] = 0;
     initialized = 1;
     if (mojin_graphics_valid(o)) view.saved = view.pending = *o;
-    else view.saved = view.pending = (MojinGraphicsOptions){1,1,960,544,0};
+    else view.saved = view.pending = (MojinGraphicsOptions){1,1,960,544,0,60};
     if (path && path[0] && strlen(path) < sizeof(settings_path)) {
         memcpy(settings_path, path, strlen(path) + 1);
         view.writable = 1;
@@ -50,7 +50,8 @@ const MojinGraphicsView *mojin_graphics_view(void) {
          * directly after validating its own INI and clearing diagnostics. */
         const char *r = getenv("SR_RESOLUTION_SCALE"), *a = getenv("SR_MOJIN_SETTINGS_SSAA");
         const char *w = getenv("SR_MOJIN_WINDOW_SIZE");
-        MojinGraphicsOptions o = {r ? atoi(r) : 1, a ? atoi(a) : 1,960,544,0};
+        const char *fps = getenv("SR_MOJIN_GAME_FPS");
+        MojinGraphicsOptions o = {r ? atoi(r) : 1, a ? atoi(a) : 1,960,544,0,fps ? atoi(fps) : 60};
         if (w) (void)sscanf(w, "%dx%d", &o.width, &o.height);
         mojin_graphics_configure(getenv("SR_MOJIN_SETTINGS_FILE"), &o);
     }
@@ -87,6 +88,7 @@ void mojin_graphics_step(int field, int direction) {
         for (int n=0;n<5;n++) if (sizes[n][0] == view.pending.width && sizes[n][1] == view.pending.height) i=n;
         i=step_index(i,5,direction); view.pending.width=sizes[i][0]; view.pending.height=sizes[i][1]; break;
     case MOJIN_GRAPHICS_FULLSCREEN: view.pending.fullscreen = !view.pending.fullscreen; break;
+    case MOJIN_GRAPHICS_FPS: view.pending.fps = view.pending.fps == 60 ? 120 : 60; break;
     default: return;
     }
     view.dirty = !equal(&view.pending,&view.saved);
@@ -105,6 +107,7 @@ void mojin_graphics_choice(int field, char *out, size_t capacity) {
     case MOJIN_GRAPHICS_AA: snprintf(out,capacity,"%s",o->ssaa==1?"关闭":o->ssaa==2?"每轴 2 倍 SSAA":"每轴 4 倍 [实验]"); break;
     case MOJIN_GRAPHICS_WINDOW: snprintf(out,capacity,"%d × %d",o->width,o->height); break;
     case MOJIN_GRAPHICS_FULLSCREEN: snprintf(out,capacity,"%s",o->fullscreen?"桌面全屏":"窗口"); break;
+    case MOJIN_GRAPHICS_FPS: snprintf(out,capacity,"%s",o->fps == 120 ? "120 FPS [实验]" : "原速（60 FPS）"); break;
     default: if(capacity) out[0]=0; break;
     }
 }
@@ -129,9 +132,9 @@ int mojin_graphics_save(void) {
         if(f==INVALID_HANDLE_VALUE) goto failed;
         CloseHandle(f);
     }
-    const wchar_t *keys[]={L"RenderScale",L"SSAA",L"WindowWidth",L"WindowHeight",L"Fullscreen"};
-    const int values[]={view.pending.scale,view.pending.ssaa,view.pending.width,view.pending.height,view.pending.fullscreen};
-    for(int n=0;n<5;n++) {
+    const wchar_t *keys[]={L"RenderScale",L"SSAA",L"WindowWidth",L"WindowHeight",L"Fullscreen",L"FPS"};
+    const int values[]={view.pending.scale,view.pending.ssaa,view.pending.width,view.pending.height,view.pending.fullscreen,view.pending.fps};
+    for(int n=0;n<6;n++) {
         wchar_t number[32]; swprintf(number,32,L"%d",values[n]);
         if(!WritePrivateProfileStringW(L"Graphics",keys[n],number,temp)) goto staged_failure;
     }
@@ -146,8 +149,8 @@ int mojin_graphics_save(void) {
     if(!MoveFileExW(temp,path,MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH)) goto staged_failure;
     view.saved=view.pending; view.dirty=0;
     snprintf(view.status,sizeof(view.status),"%s","已保存，下次启动生效；当前画质不变。");
-    fprintf(stderr,"MOJIN_SETTINGS saved scale=%d ssaa=%d window=%dx%d fullscreen=%d\n",
-        view.saved.scale,view.saved.ssaa,view.saved.width,view.saved.height,view.saved.fullscreen);
+    fprintf(stderr,"MOJIN_SETTINGS saved scale=%d ssaa=%d window=%dx%d fullscreen=%d fps=%d\n",
+        view.saved.scale,view.saved.ssaa,view.saved.width,view.saved.height,view.saved.fullscreen,view.saved.fps);
     return 1;
 staged_failure:
     error=GetLastError(); DeleteFileW(temp); SetLastError(error);

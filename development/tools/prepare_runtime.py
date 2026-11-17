@@ -39,6 +39,7 @@ def prepare():
     prepare_mpeg_timestamp()
     prepare_script_handoff()
     prepare_window_pump()
+    prepare_ge_frontend()
     prepare_high_resolution()
     prepare_ge_capture()
     prepare_graphics_settings()
@@ -257,6 +258,26 @@ def prepare_window_pump():
         target.write_text(source, encoding="utf-8", newline="\n")
 
 
+def prepare_ge_frontend():
+    upstream = DEV / "third_party/nakagawa/src/rt/ge.c"
+    source = upstream.read_text(encoding="utf-8")
+    if hashlib.sha256(source.encode()).hexdigest() != "a8e82b03e8dfdfc445a4a6ae62def10d44e706c6b931225d2eef11ca822a2988":
+        raise ValueError("ge.c changed; review graphics hot paths")
+    anchor = "{ ge_capture_note_memory(addr, "
+    assert source.count(anchor) == 5
+    source = source.replace(anchor, "{ if (__builtin_expect(g_ge_capture_active, 0)) ge_capture_note_memory(addr, ")
+    target = DEV / "generated/runtime/ge.c"
+    def include(match):
+        path = (upstream.parent / match.group(1)).resolve()
+        return '#include "' + Path(os.path.relpath(path, target.parent)).as_posix() + '"' if path.is_file() else match.group(0)
+    source = re.sub(r'^#include "([^\"]+)"', include, source, flags=re.MULTILINE)
+    anchor = '#include <time.h>'
+    assert source.count(anchor) == 1
+    source = source.replace(anchor, anchor+'\n#include "../../runtime/graphics_math.h"')
+    if not target.exists() or target.read_text(encoding="utf-8") != source:
+        target.write_text(source, encoding="utf-8", newline="\n")
+
+
 def prepare_high_resolution():
     from pipeline_catalog import emit
     emit()
@@ -265,6 +286,22 @@ def prepare_high_resolution():
     if hashlib.sha256(source.encode()).hexdigest() != "df8303e3ea83188cee4765848de2e42d69877be288c63be3a465a60d71120db5":
         raise ValueError("ge_gpu.c changed; review 8x render-size support")
     target = DEV / "generated/runtime/ge_gpu.c"
+    anchor = "static int     s_tex_n = 0;"
+    assert source.count(anchor) == 1
+    source = source.replace(anchor, anchor+'\n#include "../../runtime/texture_index.h"')
+    anchor = '''    uint64_t lookup_started = cpu_profile_now();
+    for (int i = 0; i < s_tex_n; i++) {
+        TexEnt *e = &s_tex[i];
+        if (e->key != key || memcmp(&e->mip, &mip, sizeof(mip)) != 0) continue;'''
+    assert source.count(anchor) == 1
+    source = source.replace(anchor, '''    uint64_t lookup_started = cpu_profile_now();
+    for (int i = mojin_texture_start(key, &mip); i < s_tex_n; i++) {
+        TexEnt *e = &s_tex[i];
+        if (e->key != key || memcmp(&e->mip, &mip, sizeof(mip)) != 0) continue;
+        mojin_texture_found(key, (unsigned)i);''')
+    anchor = '    s_tex_n++;\n    tex_xs_note_upload(e, levels);'
+    assert source.count(anchor) == 1
+    source = source.replace(anchor, '    mojin_texture_found(key, (unsigned)s_tex_n);\n'+anchor)
     anchor = "static VkPipeline pipe_create(const PipeKey *k, int rmw) {"
     assert source.count(anchor)==1
     source=source.replace(anchor,'#include "../../runtime/pipeline_trace.h"\n'+anchor)
@@ -320,6 +357,9 @@ def prepare_high_resolution():
         path = (upstream.parent / match.group(1)).resolve()
         return '#include "' + Path(os.path.relpath(path, target.parent)).as_posix() + '"' if path.is_file() else match.group(0)
     source = re.sub(r'^#include "([^"]+)"', include, source, flags=re.MULTILINE)
+    anchor = '#include <time.h>'
+    assert source.count(anchor) == 1
+    source = source.replace(anchor, anchor+'\n#include "../../runtime/graphics_math.h"')
     anchor = "#define MAX_SCALE 4"
     assert source.count(anchor) == 1
     source = source.replace(anchor, "#define MAX_SCALE 8 /* Project: 3840x2176 visible, 4096x2176 stride. */")

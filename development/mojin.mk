@@ -1,6 +1,14 @@
 # Project overlay; invoke from the pinned Nakagawa source directory.
 # Both interpreter objects are replaced with fatal diagnostics.
 include Makefile
+# The measured night-bridge bottleneck is GE command handling, not game CPU code.
+# Optimize these native graphics units without fast-math, title patches, skipped
+# effects or changed render targets. The makefile dependency invalidates old O1
+# objects when this policy changes; retain upstream dependency/profile tracking.
+# Keep upstream ge.c's -fno-math-errno so sqrt can use native instructions;
+# guest-visible math results and floating-point contraction policy stay unchanged.
+$(BUILD_DIR)/ge.o: $(MOJIN_DEV)/generated/runtime/ge.c $(MOJIN_DEV)/mojin.mk
+	$(CC) $(CFLAGS) -O3 -fno-math-errno $(DEPFLAGS) -c $< -o $@
 $(BUILD_DIR)/iso_public.o: $(MOJIN_DEV)/runtime/disc_data.c $(MOJIN_DEV)/generated/runtime/disc_manifest.h
 	$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 RT_OBJS += $(BUILD_DIR)/mojin_graphics_settings.o
@@ -72,8 +80,8 @@ $(BUILD_DIR)/sdl3vk.o: $(MOJIN_DEV)/generated/runtime/sdl3vk.c $(MOJIN_DEV)/runt
 $(BUILD_DIR)/driver.o: $(MOJIN_DEV)/generated/runtime/driver.c $(MOJIN_DEV)/runtime/standalone.h
 	$(CC) $(CFLAGS) -I$(TITLE_CONFIG_DIR) $(DEPFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/ge_gpu.o: $(MOJIN_DEV)/generated/runtime/ge_gpu.c $(MOJIN_DEV)/generated/runtime/glyph_recon.h
-	$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
+$(BUILD_DIR)/ge_gpu.o: $(MOJIN_DEV)/generated/runtime/ge_gpu.c $(MOJIN_DEV)/generated/runtime/glyph_recon.h $(MOJIN_DEV)/mojin.mk
+	$(CC) $(CFLAGS) -O3 $(DEPFLAGS) -c $< -o $@
 
 $(BUILD_DIR)/ge_capture.o: $(MOJIN_DEV)/generated/runtime/ge_capture.c $(MOJIN_DEV)/runtime/capture_stream.h
 	$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@

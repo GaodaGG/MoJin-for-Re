@@ -42,7 +42,7 @@ int main(int argc,char **argv) {
     CHECK(MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,path,-1,wide,4096));
     FILE *f=_wfopen(wide,L"wb"); CHECK(f);
     CHECK(fputs("; keep me\n[Graphics]\nRenderScale=4\nSSAA=2\nWindowWidth=960\nWindowHeight=544\nFullscreen=0\nFutureOption=42\n[Audio]\nVolume=77\n",f)>=0); CHECK(!fclose(f));
-    MojinGraphicsOptions initial={4,2,960,544,0};
+    MojinGraphicsOptions initial={4,2,960,544,0,60};
     mojin_graphics_configure(path,&initial);
     mojin_graphics_observe(1,4,2,960,544);
     CHECK(mojin_graphics_view()->scene_width==3840);
@@ -69,6 +69,7 @@ int main(int argc,char **argv) {
     for(int i=0;i<4;i++) CHECK(key(SDLK_RIGHT));
     CHECK(mojin_graphics_view()->pending.width==3840);
     CHECK(key(SDLK_DOWN)); CHECK(key(SDLK_RIGHT)); CHECK(mojin_graphics_view()->pending.fullscreen==1);
+    CHECK(key(SDLK_DOWN)); CHECK(key(SDLK_RIGHT)); CHECK(mojin_graphics_view()->pending.fps==120);
     CHECK(key(SDLK_DOWN)); CHECK(key(SDLK_LEFT)); CHECK(key(SDLK_LEFT)); CHECK(key(SDLK_RETURN));
     fprintf(stderr,"button action=%d status=%s\n",last_action,mojin_graphics_view()->status);
     snprintf(bmp,sizeof(bmp),"%s/settings-button.bmp",argv[1]); CHECK(SDL_SaveBMP(surface,bmp));
@@ -78,6 +79,7 @@ int main(int argc,char **argv) {
     CHECK(GetPrivateProfileIntW(L"Graphics",L"RenderScale",0,wide)==8);
     CHECK(GetPrivateProfileIntW(L"Graphics",L"SSAA",0,wide)==4);
     CHECK(GetPrivateProfileIntW(L"Graphics",L"WindowWidth",0,wide)==3840);
+    CHECK(GetPrivateProfileIntW(L"Graphics",L"FPS",0,wide)==120);
     CHECK(GetPrivateProfileIntW(L"Graphics",L"FutureOption",0,wide)==42);
     CHECK(GetPrivateProfileIntW(L"Audio",L"Volume",0,wide)==77);
     swprintf(backup,4096,L"%ls.previous",wide);
@@ -94,7 +96,8 @@ int main(int argc,char **argv) {
         (int)GetPrivateProfileIntW(L"Graphics",L"SSAA",0,wide),
         (int)GetPrivateProfileIntW(L"Graphics",L"WindowWidth",0,wide),
         (int)GetPrivateProfileIntW(L"Graphics",L"WindowHeight",0,wide),
-        (int)GetPrivateProfileIntW(L"Graphics",L"Fullscreen",0,wide)};
+        (int)GetPrivateProfileIntW(L"Graphics",L"Fullscreen",0,wide),
+        (int)GetPrivateProfileIntW(L"Graphics",L"FPS",60,wide)};
     CHECK(mojin_graphics_valid(&loaded));
     mojin_graphics_configure(path,&loaded); CHECK(mojin_graphics_view()->pending.scale==8);
     mojin_graphics_observe(1,8,1,2560,1600); /* Actual SSAA downgrade and constrained output. */

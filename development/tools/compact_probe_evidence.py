@@ -28,7 +28,9 @@ def main():
             record_path = run / "result.json"
         if not record_path or not record_path.is_file() or "exit_code" not in json.loads(record_path.read_text(encoding="utf-8")):
             parser.error("Only completed project probes or settings UI tests are accepted")
-        files += [p for p in run.iterdir() if p.is_file() and p.suffix in {".ppm", ".wav", ".ngef", ".bmp"}]
+        files += [p for p in run.iterdir() if p.is_file() and
+                  (p.suffix in {".ppm", ".wav", ".ngef", ".bmp"} or
+                   (p.name.startswith('ram-') and p.suffix=='.bin'))]
     if any(path.is_symlink() or path.is_junction() for path in files):
         parser.error("Links are not accepted")
     results = []

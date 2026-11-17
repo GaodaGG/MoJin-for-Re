@@ -6,6 +6,8 @@
  */
 #include "recomp.h"
 #include <SDL3/SDL.h>
+#include "ge_profile.h"
+extern uint32_t mojin_experimental_step_fraction(void);
 
 typedef struct {
     uint64_t host_ns, guest_us;
@@ -17,6 +19,8 @@ typedef struct {
     uint64_t engine_time_us;
     int32_t speed_factor;
     uint32_t step_override_bits;
+    uint32_t step_fraction;
+    uint32_t transform_valid, transform_angle, transform_x, transform_z, transform_y;
 } MojinLoopRow;
 static MojinLoopRow rows[131072];
 static unsigned count, dropped;
@@ -25,7 +29,8 @@ static FILE *output;
 
 static void finish(void) {
     if (!output) return;
-    fputs("seq,host_ns,guest_us,vcount,pc,callback,state,engine_frame,uid,scene_callback,update_count,step_i,step_f_bits,step_frame_bits,time_s_bits,tick_remainder,whole_ticks,battle_object,battle_valid,battle_state,battle_ticks,battle_calls,battle_handler,input_buttons,input_pressed,stick_direction,stick_pressed,input_history_index,engine_time_us,speed_factor,step_override_bits\n", output);
+    mojin_ge_profile_finish();
+    fputs("seq,host_ns,guest_us,vcount,pc,callback,state,engine_frame,uid,scene_callback,update_count,step_i,step_f_bits,step_frame_bits,time_s_bits,tick_remainder,whole_ticks,battle_object,battle_valid,battle_state,battle_ticks,battle_calls,battle_handler,input_buttons,input_pressed,stick_direction,stick_pressed,input_history_index,engine_time_us,speed_factor,step_override_bits,step_fraction,transform_valid,transform_angle,transform_x,transform_z,transform_y\n", output);
     for (unsigned i = 0; i < count; ++i) {
         const MojinLoopRow *r = &rows[i];
         fprintf(output, "%u,%llu,%llu,%u,%08x,%08x,%u,%u,%x,%08x,%u,%u,%08x,%08x,%08x,%u,%u", i,
@@ -37,8 +42,10 @@ static void finish(void) {
                 r->battle_state, r->battle_ticks, r->battle_calls, r->battle_handler);
         fprintf(output, ",%u,%u,%u,%u,%u", r->input_buttons, r->input_pressed,
                 r->stick_direction, r->stick_pressed, r->input_history_index);
-        fprintf(output, ",%llu,%d,%08x\n", (unsigned long long)r->engine_time_us,
-                r->speed_factor, r->step_override_bits);
+        fprintf(output, ",%llu,%d,%08x,%u", (unsigned long long)r->engine_time_us,
+                r->speed_factor, r->step_override_bits, r->step_fraction);
+        fprintf(output, ",%u,%08x,%08x,%08x,%08x\n", r->transform_valid,
+                r->transform_angle, r->transform_x, r->transform_z, r->transform_y);
     }
     int failed = ferror(output);
     failed |= fclose(output) != 0;
@@ -67,6 +74,7 @@ void mojin_loop_trace(const CpuState *s, uint32_t pc) {
     r->guest_us = sched_vtime_us(); /* snapshot getter; deliberately no refresh */
     r->vcount = sr_display_vcount();
     r->pc = pc;
+    mojin_ge_profile_sample(r->vcount, pc);
     r->callback = MEM_R32(0x08a3d104u);
     r->state = MEM_R32(0x08a3d108u);
     r->engine_frame = MEM_R32(0x08a65f88u); /* 0x08a64680 + 0x1908 */
@@ -96,6 +104,17 @@ void mojin_loop_trace(const CpuState *s, uint32_t pc) {
                        ((uint64_t)MEM_R32(0x08a65f74u) << 32);
     r->speed_factor = (int16_t)MEM_R16(0x08a543f6u);
     r->step_override_bits = MEM_R32(0x08a544a0u);
+    r->step_fraction = mojin_experimental_step_fraction(); /* read-only host snapshot */
+    /* Fixed title object, class installed at 0881c0d0. The transform matches
+     * the controlled fighter and its render matrix in the training capture.
+     * Keep raw values; the analysis must bind semantics to the input route. */
+    if (MEM_R32(0x08a3fde8u) == 0x08a13068u) {
+        r->transform_valid = 1;
+        r->transform_angle = MEM_R32(0x08a3fe04u);
+        r->transform_x = MEM_R32(0x08a3fe08u);
+        r->transform_z = MEM_R32(0x08a3fe0cu);
+        r->transform_y = MEM_R32(0x08a3fe10u);
+    }
     /* f_08857878 passes this object's +8 pointer to f_088258c4, whose
      * counters and state-handler dispatch were inspected from the static code.
      * Restrict reads to the mapped 32 MiB PSP RAM and the observed class table. */

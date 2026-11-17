@@ -4,7 +4,7 @@
   "input_iso_sha256": "40469759cf0f033f8610f7920ab09b1866040d80b46ff0bdb16b03dfd137b9cb",
   "resource_manifest_sha256": "4964a21dc82750ffeab9dc082af3e92c65b630f09f3dc484da63a49378ee7cc2",
   "generator_inputs": {
-    "development/tools/codegen.py": "78d2be1d9cd6e4fe5dc88d45a6ffb33c75f8023e5e4e73c6488c5359bc16326f",
+    "development/tools/codegen.py": "534130f6db510e5ef3326e81d49b80c23a1978805fe4c40cab2fa44438777ed8",
     "development/tools/entry_proof.py": "b107e626012b5ae4e6cf35c206c679e1d5c61bd5199f2e939c69c6d500f3e844",
     "development/inputs/dispatch-seeds.txt": "ea362dba5fabecad60d4dd6e6a316d57c55b36a26c4b631badc22085db3bd6a1"
   },
@@ -478,8 +478,8 @@
       "sha256": "a4bee2216c86628a72d35f661ca0230dc8980f3260b12265af52e4fe3a5e7eb2"
     },
     "mojin_recomp_89.c": {
-      "bytes": 249080,
-      "sha256": "50c843ec3080c3d384bee3b043e90c477d00734e34f8415305cf09b9affc6f80"
+      "bytes": 249296,
+      "sha256": "73125bbb995cae41553bdfe74b1661fca6725d1fecea12c7b02cc7e26a36cb48"
     },
     "mojin_recomp_9.c": {
       "bytes": 801321,
@@ -542,7 +542,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   },
-  "source_build_sha256": "b2231886d6e9c5005eb6672be51ce76a15fb52e42693384438588e5bd053267a",
-  "source_executable_sha256": "6862536420a0bdb9c90f16f3d101e47eafddb3e062eb6d99207ee82074e3bad3",
+  "source_build_sha256": "79387151e4db812bd5ca3ed86ec42ed08d6de335c8220de21fd8b0822e05fcbc",
+  "source_executable_sha256": "583c753d6477c0932c58b1958165e8ebc96bc132bdd9a59e0eac7fb98332878f",
   "notice": "Derived game code and data. This manifest grants no redistribution rights."
 }

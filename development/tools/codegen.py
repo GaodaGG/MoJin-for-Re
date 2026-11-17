@@ -37,6 +37,8 @@ LOOP_TRACE_SITES = {
     0x0891d368: 0x8e231908,  # common update returned to the engine loop
 }
 loop_trace_seen = set()
+STEP_CARRY_SITES = {0x0891c0c4: 0x28440081, 0x0891c1c8: 0x28440081}
+step_carry_seen = set()
 stock_normal_line = upstream.normal_line
 
 
@@ -48,6 +50,12 @@ def observed_normal_line(addr, word, *args, **kwargs):
         loop_trace_seen.add(addr)
         line = ("    { extern void mojin_loop_trace(const CpuState *, uint32_t); "
                 f"mojin_loop_trace(s, 0x{addr:08x}u); }}\n" + line)
+    if addr in STEP_CARRY_SITES:
+        if word != STEP_CARRY_SITES[addr]:
+            raise ValueError(f'Step comparison instruction changed at {addr:08x}')
+        step_carry_seen.add(addr)
+        line = ('    { extern void mojin_experimental_step(CpuState *, uint32_t); '
+                f'mojin_experimental_step(s, 0x{addr:08x}u); }}\n' + line)
     return line
 
 
@@ -177,6 +185,7 @@ upstream._VFPU4_VOCP_OP9_FORMS[7] = horizontal_sum
 def generate(argv):
     global frame_wait_seen, input_poll_seen
     loop_trace_seen.clear()
+    step_carry_seen.clear()
     frame_trace_seen.clear()
     frame_wait_seen = False
     input_poll_seen = False
@@ -195,6 +204,8 @@ def generate(argv):
         previous[path] = (hashlib.sha256(path.read_bytes()).digest(), info.st_atime_ns, info.st_mtime_ns)
     result = upstream.main(argv)
     if result == 0:
+        if step_carry_seen != set(STEP_CARRY_SITES):
+            raise ValueError(f'Missing static step sites: {set(STEP_CARRY_SITES) - step_carry_seen}')
         if loop_trace_seen != set(LOOP_TRACE_SITES):
             raise ValueError(f"Missing loop observation sites: {set(LOOP_TRACE_SITES) - loop_trace_seen}")
         if not frame_wait_seen:

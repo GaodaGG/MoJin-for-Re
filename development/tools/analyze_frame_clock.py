@@ -47,15 +47,22 @@ def summarize(run):
     clock = re.search(r'MOJIN_FRAME_CLOCK target=(\d+) calls=(\d+) late=(\d+) errors=(\d+)', log)
     if clock:
         assert int(clock[2]) > 0 and clock[4] == '0', 'Experiment did not activate cleanly'
-    target = meta['environment'].get('SR_MOJIN_EXPERIMENTAL_UPDATE_RATE')
+    game_mode = meta['environment'].get('SR_MOJIN_GAME_FPS') == '120'
+    target = '120' if game_mode else meta['environment'].get('SR_MOJIN_EXPERIMENTAL_UPDATE_RATE')
     assert bool(target) == bool(clock)
     if target:
         assert int(target) == int(clock[1])
     input_log = re.search(r'MOJIN_FRAME_INPUT mode=peek calls=(\d+) repeated_samples=(\d+) errors=(\d+)', log)
-    input_requested = meta['environment'].get('SR_MOJIN_EXPERIMENTAL_INPUT_PEEK') == '1'
+    input_requested = game_mode or meta['environment'].get('SR_MOJIN_EXPERIMENTAL_INPUT_PEEK') == '1'
     assert input_requested == bool(input_log)
     if input_log:
         assert int(input_log[1]) > 0 and input_log[3] == '0'
+    step_requested = game_mode or meta['environment'].get('SR_MOJIN_EXPERIMENTAL_STEP_CARRY') == '1'
+    step_log = re.search(r'MOJIN_STEP_CARRY calls=(\d+) applied=(\d+) bypassed=(\d+) errors=(\d+) original_ticks=(\d+) corrected_ticks=(\d+) denominator=(\d+)', log)
+    assert step_requested == bool(step_log), 'Requested step correction was not observed'
+    if step_log:
+        assert target and input_requested and int(step_log[2]) > 0 and step_log[4] == '0'
+        assert int(step_log[1]) == int(step_log[2]) + int(step_log[3]) and step_log[7] == '66668'
     execution = json.loads((run / 'execution-share.json').read_text(encoding='utf-8'))
     assert execution['interp_entries'] == 0 and execution['miss_targets'] == 0
     with (run / 'loop.csv').open(newline='') as stream:
@@ -63,6 +70,18 @@ def summarize(run):
     assert len(all_rows) == int(trace[1])
     assert [int(r['seq']) for r in all_rows] == list(range(len(all_rows))), 'Missing/reordered trace rows'
     assert all(int(b['host_ns']) >= int(a['host_ns']) for a,b in itertools.pairwise(all_rows)), 'Host time reversed'
+    gate_check = None
+    if all_rows and 'step_fraction' in all_rows[0]:
+        updates = [r for r in all_rows if r['pc'] == '08907d6c']
+        # Leave one vblank at each edge for a step calculated in the preceding
+        # frame end to reach the next update. Outside it, all carry state is reset.
+        if game_mode:
+            outside = [b for a,b in itertools.pairwise(updates)
+                       if a['scene_callback'] != '0885f978' and b['scene_callback'] != '0885f978']
+        else:
+            outside = [r for r in updates if not step_requested or int(r['vcount']) < 7399 or int(r['vcount']) > 9000]
+        assert outside and all(int(r['step_fraction']) == 0xffffffff for r in outside), 'Correction leaked outside its opt-in window'
+        gate_check = dict(inactive_samples=len(outside), all_inactive=True)
     rows, update_coverage = complete_window([r for r in all_rows if r['pc'] == '08907d6c'], 'updates')
     assert len(rows) > 2 and {r['scene_callback'] for r in rows} == {'0885f978'}
     assert {r['state'] for r in rows} == {'3'} and len({r['uid'] for r in rows}) == 1
@@ -118,31 +137,57 @@ def summarize(run):
                             stick_pressed_masks=dict(Counter(r['stick_pressed'] for r in rows)),
                             history_step_mod64=dict(Counter((int(b['input_history_index'])-int(a['input_history_index'])) % 64
                                                           for a,b in itertools.pairwise(rows))),
-                            note='Idle route has no scripted presses in this interval; this alone does not verify edge or analog behavior.')
+                            note='Input-mask observations; compare the recorded input.pad before interpreting edge and hold counts.')
     arithmetic = None
     if 'engine_time_us' in rows[0]:
         predictions = []
+        speed_resets = 0
         for a,b in itertools.pairwise(rows):
             delta = int(b['engine_time_us']) - int(a['engine_time_us'])
             speed = int(b['speed_factor'])
             assert delta > 0 and speed > 0, 'Unsupported time/speed regime for this arithmetic analysis'
             assert float_bits(b['step_override_bits']) <= 0, 'Positive common-step override needs separate analysis'
+            assert float_bits(b['step_f_bits']) == int(b['step_i']), 'Integer and floating game steps disagree'
+            assert float_bits(b['step_frame_bits']) == int(b['step_i']) / 32, 'Per-frame scale did not consume the same step'
             percent = delta * 100 // 16667
             quantized = percent * (speed << 5) // 12800
             expected = 32 if quantized <= 0 else min(128, quantized)
+            corrected = expected
+            if step_requested:
+                previous_fraction, actual_fraction = int(a['step_fraction']), int(b['step_fraction'])
+                assert 0 <= previous_fraction < 66668 and 0 <= actual_fraction < 66668, 'Inactive/bypassed carry in observation window'
+                if speed != int(a['speed_factor']):
+                    # Production resets the fraction when the title changes
+                    # speed (e.g. hit stop). Verify that boundary explicitly.
+                    previous_fraction = 0
+                    speed_resets += 1
+                corrected, remainder = divmod(delta * speed + previous_fraction, 66668)
+                assert remainder == actual_fraction, 'Fraction was not conserved'
+                assert corrected == int(b['step_i']), 'Generated step differs from carried arithmetic'
             predictions.append(dict(delta_us=delta, speed=speed, expected=expected,
-                                    actual=int(b['step_i']), ideal=delta*100*(speed<<5)/(16667*12800)))
+                                    corrected=corrected, actual=int(b['step_i']), ideal=delta*100*(speed<<5)/(16667*12800)))
         arithmetic = dict(samples=len(predictions),
             speed_values=dict(Counter(r['speed_factor'] for r in rows)),
             exact_integer_formula_matches=sum(x['expected']==x['actual'] for x in predictions),
+            selected_model_matches=sum(x['corrected']==x['actual'] for x in predictions),
+            selected_model='fractional-carry' if step_requested else 'stock-two-divisions',
             expected_step_sum=sum(x['expected'] for x in predictions),
             observed_step_sum=sum(x['actual'] for x in predictions),
             unrounded_step_sum=sum(x['ideal'] for x in predictions),
             engine_elapsed_seconds=sum(x['delta_us'] for x in predictions)/1e6,
             integer_step_seconds=sum(x['actual'] for x in predictions)/1920,
             unrounded_step_seconds=sum(x['ideal'] for x in predictions)/1920,
-            formula='clamp_or_fallback(floor(floor(delta_us*100/16667)*(speed_i16<<5)/12800))',
+            formula=('divmod(delta_us*speed_i16+previous_remainder,66668) within the supported positive unclamped window'
+                     if step_requested else 'clamp_or_fallback(floor(floor(delta_us*100/16667)*(speed_i16<<5)/12800))'),
+            expected_step_sum_meaning='Counterfactual stock two-division step sum; observed_step_sum is the actual game result.',
             note='Pinned positive-speed arithmetic only; does not certify consumers or gameplay speed.')
+        if step_requested:
+            arithmetic['fractional_ticks_error'] = arithmetic['observed_step_sum'] - arithmetic['unrounded_step_sum']
+            arithmetic['verified_speed_resets'] = speed_resets
+            # Each independently verified reset may discard less than one tick.
+            assert -(speed_resets+1.0000001) < arithmetic['fractional_ticks_error'] < 1.0000001, 'Unexplained cumulative truncation'
+            arithmetic['remainder_verified_each_interval'] = True
+        arithmetic['integer_float_and_frame_steps_agree'] = True
     return dict(run=str(run.relative_to(DEV)), analyzer_sha256=sha(Path(__file__)), executable_sha256=meta['executable_sha256'],
                 image_sha256=meta['image_sha256'], input_script_sha256=meta['input_script_sha256'],
                 hashes={name: sha(run / name) for name in ('run.json','build.json','input.pad','loop.csv','frames.csv','stderr.log','execution-share.json')},
@@ -150,6 +195,10 @@ def summarize(run):
                 coverage=dict(updates=update_coverage, frames=frame_coverage),
                 clock_arithmetic=arithmetic,
                 experimental_input_peek=input_requested,
+                experimental_step_carry=step_requested,
+                step_carry_gate=gate_check,
+                step_carry_counts=dict(zip(('calls','applied','bypassed','errors','original_ticks','corrected_ticks','denominator'),
+                                          map(int,step_log.groups()))) if step_log else None,
                 input_poll=dict(calls=int(input_log[1]), repeated_samples=int(input_log[2]), errors=int(input_log[3])) if input_log else None,
                 active_experiment_calls=int(clock[2]) if clock else 0,
                 missed_deadlines=int(clock[3]) if clock else 0,

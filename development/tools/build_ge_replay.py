@@ -1,5 +1,6 @@
 """Build the pinned graphics-only fixture tool with this project's rendering overlays."""
 import hashlib
+import argparse
 import json
 import os
 from pathlib import Path
@@ -15,12 +16,15 @@ def sha(path):
 
 
 def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--optimization',choices=['O1','O3'],default='O1')
+    args=parser.parse_args()
     prepare()
     if subprocess.check_output(["git", "-C", str(SRC), "rev-parse", "HEAD"], text=True).strip() != REV:
         raise SystemExit("Unvalidated upstream revision")
     if subprocess.check_output(["git", "-C", str(SRC), "status", "--porcelain", "--untracked-files=no"], text=True).strip():
         raise SystemExit("Upstream tracked sources changed")
-    out = DEV / "generated/ge-replay"
+    out = DEV / ('generated/ge-replay' if args.optimization=='O1' else 'generated/ge-replay-O3')
     out.mkdir(parents=True, exist_ok=True)
     toolroot = DEV / "toolchain/msys64/ucrt64"
     env = os.environ.copy()
@@ -37,7 +41,7 @@ def main():
         f"BUILD_ROOT={(DEV / 'build').as_posix()}",
         f"PYTHON={(DEV / 'toolchain/python/python.exe').as_posix()}",
         f"SDL3_DIR={toolroot.as_posix()}", f"VULKAN_SDK={toolroot.as_posix()}",
-        "RUNTIME_OPT=-O1", "TRACE=0", "SHELL=cmd.exe"]
+        f"RUNTIME_OPT=-{args.optimization}", "TRACE=0", "SHELL=cmd.exe"]
     log = DEV / "evidence/build-ge-replay.log"
     with log.open("w", encoding="utf-8") as stream:
         result = subprocess.run(command, cwd=SRC, env=env, stdout=stream, stderr=subprocess.STDOUT)
